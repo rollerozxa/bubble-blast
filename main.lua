@@ -12,9 +12,9 @@ game = {
 
 scenes = {}
 
-dofile("game.lua")
-dofile("mainmenu.lua")
-dofile("util.lua")
+require("game")
+require("mainmenu")
+require("util")
 
 function love.load()
 	love.window.setMode(game.resolution.x, game.resolution.y)
