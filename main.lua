@@ -13,6 +13,7 @@ game = {
 scenes = {}
 
 dofile("game.lua")
+dofile("mainmenu.lua")
 dofile("util.lua")
 
 function love.load()
@@ -28,6 +29,7 @@ function love.load()
 		},
 		particle = love.graphics.newImage("assets/particle.png"),
 		refresh = love.graphics.newImage("assets/refresh.png"),
+		btn_play = love.graphics.newImage("assets/btn_play.png"),
 		fonts = {
 			default = love.graphics.newFont(11),
 			defaultBig = love.graphics.newFont(40)
@@ -44,7 +46,11 @@ function love.update()
 		game.newlyState = false
 	end
 
-	scenes.game.update()
+	if game.state == 1 then
+		scenes.mainmenu.update()
+	elseif game.state == 2 then
+		scenes.game.update()
+	end
 
 	oldmousedown = love.mouse.isDown(1)
 end
@@ -52,7 +58,11 @@ end
 function love.draw()
 	love.graphics.setBackgroundColor(0.6, 0.6, 0.6)
 
-	scenes.game.draw()
+	if game.state == 1 then
+		scenes.mainmenu.draw()
+	elseif game.state == 2 then
+		scenes.game.draw()
+	end
 
 	love.graphics.setFont(assets.fonts.default)
 	love.graphics.print("FPS: "..love.timer.getFPS(), 5, 5)
