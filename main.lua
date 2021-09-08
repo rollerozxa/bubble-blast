@@ -17,6 +17,7 @@ scenes = {}
 
 require("game")
 require("mainmenu")
+require("selectlevel")
 require("util")
 
 function love.load()
@@ -34,8 +35,14 @@ function love.load()
 		refresh		= NewImage("refresh"),
 		btn_play	= NewImage("btn_play"),
 		debug_grid	= NewImage("_debug_grid"),
+		lvlok		= NewImage("lvlok"),
+		arrow = {
+			left	= NewImage("arrow_left"),
+			right	= NewImage("arrow_right"),
+		},
 		fonts = {
 			default = love.graphics.newFont(11),
+			defaultMedium = love.graphics.newFont(24),
 			defaultBig = love.graphics.newFont(40)
 		}
 	}
@@ -45,7 +52,9 @@ end
 
 function love.update()
 	if game.newlyState then
-		scenes.game.init()
+		if game.state == 3 then
+			scenes.game.init()
+		end
 
 		game.newlyState = false
 	end
@@ -53,20 +62,28 @@ function love.update()
 	if game.state == 1 then
 		scenes.mainmenu.update()
 	elseif game.state == 2 then
+		scenes.selectlevel.update()
+	elseif game.state == 3 then
 		scenes.game.update()
 	end
 
 	oldmousedown = love.mouse.isDown(1)
 
-	if (love.keyboard.isDown('f3') and love.keyboard.isDown('g')) and not oldgriddebug then
-		if game.debug.grid then
-			game.debug.grid = false
-		else
-			game.debug.grid = true
+	if love.keyboard.isDown('f3') then
+		if love.keyboard.isDown('g') and not oldgriddebug then
+			if game.debug.grid then
+				game.debug.grid = false
+			else
+				game.debug.grid = true
+			end
 		end
-	end
+		oldgriddebug = love.keyboard.isDown('g')
 
-	oldgriddebug = (love.keyboard.isDown('f3') and love.keyboard.isDown('g'))
+		if love.keyboard.isDown('s') and not oldselectdebug then
+			game.state = 2
+		end
+		oldselectdebug = love.keyboard.isDown('s')
+	end
 end
 
 function love.draw()
@@ -75,6 +92,8 @@ function love.draw()
 	if game.state == 1 then
 		scenes.mainmenu.draw()
 	elseif game.state == 2 then
+		scenes.selectlevel.draw()
+	elseif game.state == 3 then
 		scenes.game.draw()
 	end
 
@@ -89,5 +108,6 @@ function love.draw()
 		end
 		love.graphics.print("Debug Grid On", 5, 460)
 	end
+
 	love.graphics.print("FPS: "..love.timer.getFPS(), 5, 5)
 end
