@@ -22,14 +22,14 @@ function love.load()
 
 	assets = {
 		bubble = {
-			love.graphics.newImage("assets/bubble1.png"),
-			love.graphics.newImage("assets/bubble2.png"),
-			love.graphics.newImage("assets/bubble3.png"),
-			love.graphics.newImage("assets/bubble4.png")
+			NewImage("bubble1"),
+			NewImage("bubble2"),
+			NewImage("bubble3"),
+			NewImage("bubble4")
 		},
-		particle = love.graphics.newImage("assets/particle.png"),
-		refresh = love.graphics.newImage("assets/refresh.png"),
-		btn_play = love.graphics.newImage("assets/btn_play.png"),
+		particle	= NewImage("particle"),
+		refresh		= NewImage("refresh"),
+		btn_play	= NewImage("btn_play"),
 		fonts = {
 			default = love.graphics.newFont(11),
 			defaultBig = love.graphics.newFont(40)

@@ -9,3 +9,7 @@ end
 function CheckMouseCollision(x,y,w,h)
 	return CheckCollision(x, y, w, h, love.mouse.getX(), love.mouse.getY(), 4, 4) and love.mouse.isDown(1) and not oldmousedown
 end
+
+function NewImage(filename)
+	return love.graphics.newImage("assets/"..filename..".png")
+end
