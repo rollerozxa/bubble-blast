@@ -7,7 +7,10 @@ game = {
 	bubbles = {},
 	particles = {},
 	state = 1,
-	newlyState = true
+	newlyState = true,
+	debug = {
+		grid = false
+	}
 }
 
 scenes = {}
@@ -30,6 +33,7 @@ function love.load()
 		particle	= NewImage("particle"),
 		refresh		= NewImage("refresh"),
 		btn_play	= NewImage("btn_play"),
+		debug_grid	= NewImage("_debug_grid"),
 		fonts = {
 			default = love.graphics.newFont(11),
 			defaultBig = love.graphics.newFont(40)
@@ -53,6 +57,16 @@ function love.update()
 	end
 
 	oldmousedown = love.mouse.isDown(1)
+
+	if (love.keyboard.isDown('f3') and love.keyboard.isDown('g')) and not oldgriddebug then
+		if game.debug.grid then
+			game.debug.grid = false
+		else
+			game.debug.grid = true
+		end
+	end
+
+	oldgriddebug = (love.keyboard.isDown('f3') and love.keyboard.isDown('g'))
 end
 
 function love.draw()
@@ -65,5 +79,15 @@ function love.draw()
 	end
 
 	love.graphics.setFont(assets.fonts.default)
+	love.graphics.setColor(1,1,1)
+
+	if game.debug.grid then
+		for x = 0,40 do
+			for y = 0,40 do
+				love.graphics.draw(assets.debug_grid, x*32, y*32)
+			end
+		end
+		love.graphics.print("Debug Grid On", 5, 460)
+	end
 	love.graphics.print("FPS: "..love.timer.getFPS(), 5, 5)
 end
