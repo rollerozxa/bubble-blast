@@ -11,6 +11,18 @@ function scenes.selectlevel.update()
 	if CheckMouseCollision(288, 64, 32, 32) and scenes.selectlevel.page ~= 4 then
 		scenes.selectlevel.page = scenes.selectlevel.page + 1
 	end
+
+	for i = 0,24 do
+		local x = (i % 5) + 1
+		local y = math.floor(i / 5)
+		local levelnum = ((scenes.selectlevel.page - 1) * 25 ) + i + 1
+
+		if CheckMouseCollision(x * 64 - 32, 128 + y * 64, 32, 32) and levelnum <= game.levelsUnlocked then
+			game.level = levelnum
+			game.state = 3
+			game.newlyState = true
+		end
+	end
 end
 
 function scenes.selectlevel.draw()

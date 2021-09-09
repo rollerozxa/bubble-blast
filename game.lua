@@ -1,7 +1,7 @@
 
 scenes.game = {}
 
-function initialize()
+function initializeRandom()
 	game.bubbles = {}
 	for x = 0,4 do
 		for y = 0,5 do
@@ -11,6 +11,20 @@ function initialize()
 				state = love.math.random(1,4)
 			})
 		end
+	end
+end
+
+function initializeLevel()
+	local leveljson = love.filesystem.read("levelpacks/1/"..game.level..".json")
+	local leveldata = json.decode(leveljson)
+
+	game.bubbles = {}
+	for _,bubble in pairs(leveldata.bubbles) do
+		table.insert(game.bubbles, {
+			x = 32 + 64 * (bubble.x - 1),
+			y = 64 + 64 * (bubble.y - 1),
+			state = bubble.state
+		})
 	end
 end
 
@@ -35,12 +49,16 @@ function breakBubble(key)
 end
 
 function scenes.game.init()
-	initialize()
+	if game.level == 0 then
+		initializeRandom()
+	else
+		initializeLevel()
+	end
 end
 
 function scenes.game.update()
 	if (love.keyboard.isDown('n') and not oldndown) or CheckMouseCollision(320, 0, 32, 32) then
-		initialize()
+		scenes.game.init()
 	end
 	oldndown = love.keyboard.isDown('n')
 

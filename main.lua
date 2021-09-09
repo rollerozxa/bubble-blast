@@ -17,6 +17,8 @@ game = {
 
 scenes = {}
 
+json = require("misc.json")
+
 require("game")
 require("mainmenu")
 require("selectlevel")
