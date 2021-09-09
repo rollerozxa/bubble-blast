@@ -71,7 +71,12 @@ function scenes.game.update()
 	end
 
 	for key,particle in pairs(game.particles) do
-		local speed = 3
+		local speed
+		if TableEmpty(game.bubbles) then
+			speed = 8
+		else
+			speed = 3
+		end
 		local deltaX, deltaY
 
 		if particle.dir == 'up' then
