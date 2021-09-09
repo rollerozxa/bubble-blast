@@ -33,9 +33,16 @@ function scenes.selectlevel.draw()
 
 		love.graphics.setColor(0.1,0.1,0.1)
 		love.graphics.rectangle('fill', x * 64 - 32, 128 + y * 64, 32, 32)
-		love.graphics.setColor(1,1,1)
-		love.graphics.print(levelnum, x * 64 - 28, 128 + y * 64 + 5)
 
-		love.graphics.draw(assets.lvlok, x * 64 - 32, 128 + y * 64)
+		love.graphics.setColor(1,1,1)
+		if levelnum <= game.levelsUnlocked then
+			love.graphics.print(levelnum, x * 64 - 28, 128 + y * 64 + 5)
+		else
+			love.graphics.draw(assets.lock, x * 64 - 32, 128 + y * 64)
+		end
+
+		if levelnum < game.levelsUnlocked then
+			love.graphics.draw(assets.lvlok, x * 64 - 32, 128 + y * 64)
+		end
 	end
 end

@@ -4,6 +4,8 @@ game = {
 		x = 352,
 		y = 480
 	},
+	level = 1,
+	levelsUnlocked = 1,
 	bubbles = {},
 	particles = {},
 	state = 1,
@@ -36,6 +38,7 @@ function love.load()
 		btn_play	= NewImage("btn_play"),
 		debug_grid	= NewImage("_debug_grid"),
 		lvlok		= NewImage("lvlok"),
+		lock		= NewImage("lock"),
 		arrow = {
 			left	= NewImage("arrow_left"),
 			right	= NewImage("arrow_right"),

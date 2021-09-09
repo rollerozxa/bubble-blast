@@ -3,7 +3,7 @@ scenes.mainmenu = {}
 
 function scenes.mainmenu.update()
 	if CheckMouseCollision(96, 320, 160, 32) then
-		game.state = 3
+		game.state = 2
 		game.newlyState = true
 	end
 end
