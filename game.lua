@@ -104,6 +104,15 @@ function scenes.game.update()
 			end
 		end
 	end
+
+	if TableEmpty(game.bubbles) and TableEmpty(game.particles) then
+		if game.level == game.levelsUnlocked then
+			game.levelsUnlocked = game.levelsUnlocked + 1
+			savegame.set('levelsUnlocked', game.levelsUnlocked)
+		end
+		game.state = 2
+		game.newlyState = true
+	end
 end
 
 function scenes.game.draw()

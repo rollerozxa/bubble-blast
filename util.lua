@@ -13,3 +13,10 @@ end
 function NewImage(filename)
 	return love.graphics.newImage("assets/"..filename..".png")
 end
+
+function TableEmpty(self)
+    for _, _ in pairs(self) do
+        return false
+    end
+    return true
+end
