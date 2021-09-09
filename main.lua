@@ -23,6 +23,7 @@ require("game")
 require("mainmenu")
 require("selectlevel")
 require("util")
+require("savegame")
 
 function love.load()
 	love.window.setMode(game.resolution.x, game.resolution.y)
@@ -53,6 +54,11 @@ function love.load()
 	}
 
 	love.graphics.setFont(assets.fonts.default)
+
+	savegame.load()
+	if savegame.get('levelsUnlocked') then
+		game.levelsUnlocked = savegame.get('levelsUnlocked')
+	end
 end
 
 function love.update()
