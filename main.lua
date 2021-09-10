@@ -134,7 +134,7 @@ function love.draw()
 		love.graphics.print("Debug Grid On", 5, 460)
 	end
 
-	love.graphics.print("FPS: "..love.timer.getFPS(), 5, 5)
+	love.graphics.print("FPS: "..love.timer.getFPS()..", Running at "..game.resolution.x.."x"..game.resolution.y, 5, 45)
 end
 
 function love.resize(w, h)
