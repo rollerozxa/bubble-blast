@@ -123,6 +123,7 @@ end
 function scenes.game.draw()
 	for _,bubble in pairs(game.bubbles) do
 		love.graphics.draw(assets.bubble[bubble.state], ScaledX(bubble.x), ScaledY(bubble.y), 0, ScaledX(), ScaledY())
+		love.graphics.draw(assets.bubble_eyes, ScaledX(bubble.x), ScaledY(bubble.y), 0, ScaledX(), ScaledY())
 	end
 
 	for _,particle in pairs(game.particles) do

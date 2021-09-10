@@ -49,6 +49,7 @@ function love.load()
 			NewImage("bubble3"),
 			NewImage("bubble4")
 		},
+		bubble_eyes = NewImage("bubble_eyes"),
 		particle	= NewImage("particle"),
 		refresh		= NewImage("refresh"),
 		btn_play	= NewImage("btn_play"),
