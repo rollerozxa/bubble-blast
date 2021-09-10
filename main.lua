@@ -30,8 +30,17 @@ require("util")
 require("savegame")
 
 function love.load()
-	love.window.setMode(game.resolution.x, game.resolution.y)
+	local resizable
+	-- LÖVE for Android turns the screen to landscape if resizable is true. We do not want this.
+	if love.system.getOS() == 'Android' then
+		resizable = false
+	else
+		resizable = true
+	end
+
+	love.window.setMode(game.resolution.x, game.resolution.y, { resizable = resizable })
 	love.window.setTitle("Bubble Blast")
+	love.graphics.setDefaultFilter( 'nearest', 'nearest', 4 )
 
 	assets = {
 		bubble = {
