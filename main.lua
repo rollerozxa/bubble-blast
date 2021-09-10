@@ -4,6 +4,10 @@ game = {
 		x = 352,
 		y = 480
 	},
+	base_resolution = {
+		x = 352,
+		y = 480
+	},
 	level = 1,
 	levelsUnlocked = 1,
 	bubbles = {},
@@ -121,4 +125,9 @@ function love.draw()
 	end
 
 	love.graphics.print("FPS: "..love.timer.getFPS(), 5, 5)
+end
+
+function love.resize(w, h)
+	game.resolution.x = w
+	game.resolution.y = h
 end

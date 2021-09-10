@@ -63,7 +63,7 @@ function scenes.game.update()
 	oldndown = love.keyboard.isDown('n')
 
 	for key,bubble in pairs(game.bubbles) do
-		if CheckMouseCollision(bubble.x, bubble.y, 32, 32) then
+		if CheckMouseCollision(ScaledX(bubble.x), ScaledY(bubble.y), ScaledX(32), ScaledY(32)) then
 			breakBubble(key)
 
 			break
@@ -122,12 +122,12 @@ end
 
 function scenes.game.draw()
 	for _,bubble in pairs(game.bubbles) do
-		love.graphics.draw(assets.bubble[bubble.state], bubble.x, bubble.y)
+		love.graphics.draw(assets.bubble[bubble.state], ScaledX(bubble.x), ScaledY(bubble.y), 0, ScaledX(), ScaledY())
 	end
 
 	for _,particle in pairs(game.particles) do
-		love.graphics.draw(assets.particle, particle.x, particle.y)
+		love.graphics.draw(assets.particle, ScaledX(particle.x), ScaledY(particle.y), 0, ScaledX(), ScaledY())
 	end
 
-	love.graphics.draw(assets.refresh, 320, 0)
+	love.graphics.draw(assets.refresh, AnchorTopRight(32), 0, 0, ScaledX(), ScaledY())
 end
