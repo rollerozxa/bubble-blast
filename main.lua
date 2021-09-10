@@ -140,4 +140,9 @@ end
 function love.resize(w, h)
 	game.resolution.x = w
 	game.resolution.y = h
+
+	-- Hack for ultratall devices like my Nokia 5.4.
+	if game.resolution.y / game.resolution.x > 2 then
+		game.resolution.y = math.ceil(game.resolution.x * 1.36)
+	end
 end
