@@ -15,7 +15,8 @@ game = {
 	state = 1,
 	newlyState = true,
 	debug = {
-		grid = false
+		grid = false,
+		info = false
 	}
 }
 
@@ -104,6 +105,15 @@ function love.update()
 		end
 		oldgriddebug = love.keyboard.isDown('g')
 
+		if love.keyboard.isDown('f') and not oldinfodebug then
+			if game.debug.info then
+				game.debug.info = false
+			else
+				game.debug.info = true
+			end
+		end
+		oldinfodebug = love.keyboard.isDown('f')
+
 		if love.keyboard.isDown('s') and not oldselectdebug then
 			game.state = 2
 		end
@@ -134,7 +144,9 @@ function love.draw()
 		love.graphics.print("Debug Grid On", 5, 460)
 	end
 
-	love.graphics.print("FPS: "..love.timer.getFPS()..", Running at "..game.resolution.x.."x"..game.resolution.y, 5, 45)
+	if game.debug.info then
+		love.graphics.print("FPS: "..love.timer.getFPS()..", Running at "..game.resolution.x.."x"..game.resolution.y, 5, 10)
+	end
 end
 
 function love.resize(w, h)
