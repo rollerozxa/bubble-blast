@@ -18,6 +18,7 @@ function initializeLevel()
 	local leveljson = love.filesystem.read("levelpacks/1/"..game.level..".json")
 	local leveldata = json.decode(leveljson)
 
+	game.presses = leveldata.presses
 	game.bubbles = {}
 	for _,bubble in pairs(leveldata.bubbles) do
 		table.insert(game.bubbles, {
@@ -64,6 +65,12 @@ function scenes.game.update()
 
 	for key,bubble in pairs(game.bubbles) do
 		if CheckMouseCollision(ScaledX(bubble.x), ScaledY(bubble.y), ScaledX(32), ScaledY(32)) then
+			if game.presses == 0 then
+				break
+			end
+
+			game.presses = game.presses - 1
+
 			breakBubble(key)
 
 			break
@@ -130,5 +137,17 @@ function scenes.game.draw()
 		love.graphics.draw(assets.particle, ScaledX(particle.x), ScaledY(particle.y), 0, ScaledX(), ScaledY())
 	end
 
+	love.graphics.setColor(0.5,0.5,1, 115/255)
+	love.graphics.rectangle('fill', 0, 0, game.resolution.x, ScaledY(32))
+	love.graphics.rectangle('fill', 0, game.resolution.y - ScaledY(32), game.resolution.x, ScaledY(32))
+	love.graphics.setColor(1,1,1)
+
 	love.graphics.draw(assets.refresh, AnchorTopRight(32), 0, 0, ScaledX(), ScaledY())
+
+	if game.presses == 0 then
+		love.graphics.setColor(1,0.6,0.6)
+	end
+
+	love.graphics.setFont(assets.fonts.defaultSmall)
+	love.graphics.print(game.presses.." presses left", 15, 5)
 end

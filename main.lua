@@ -10,6 +10,7 @@ game = {
 	},
 	level = 1,
 	levelsUnlocked = 1,
+	presses = 0,
 	bubbles = {},
 	particles = {},
 	state = 1,
@@ -63,6 +64,7 @@ function love.load()
 		},
 		fonts = {
 			default = love.graphics.newFont(11),
+			defaultSmall = love.graphics.newFont(20),
 			defaultMedium = love.graphics.newFont(24),
 			defaultBig = love.graphics.newFont(40)
 		}
