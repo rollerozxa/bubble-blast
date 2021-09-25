@@ -70,6 +70,10 @@ function love.load()
 		}
 	}
 
+	sounds = {
+		pop = love.audio.newSource("sounds/pop.ogg", "static")
+	}
+
 	love.graphics.setFont(assets.fonts.default)
 
 	savegame.load()

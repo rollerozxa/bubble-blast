@@ -35,6 +35,8 @@ function breakBubble(key)
 	if bubble.state < 4 then
 		game.bubbles[key].state = bubble.state + 1
 	else
+		sounds.pop:clone():play()
+
 		game.bubbles[key] = nil
 
 		local dirs = { 'up', 'left', 'down', 'right' }
