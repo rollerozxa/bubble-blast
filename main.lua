@@ -13,7 +13,7 @@ game = {
 	presses = 0,
 	bubbles = {},
 	particles = {},
-	state = 1,
+	state = "mainmenu",
 	newlyState = true,
 	debug = {
 		grid = false,
@@ -84,19 +84,15 @@ end
 
 function love.update()
 	if game.newlyState then
-		if game.state == 3 then
-			scenes.game.init()
+		if scenes[game.state].init ~= nil then
+			scenes[game.state].init()
 		end
 
 		game.newlyState = false
 	end
 
-	if game.state == 1 then
-		scenes.mainmenu.update()
-	elseif game.state == 2 then
-		scenes.selectlevel.update()
-	elseif game.state == 3 then
-		scenes.game.update()
+	if scenes[game.state].update ~= nil then
+		scenes[game.state].update()
 	end
 
 	oldmousedown = love.mouse.isDown(1)
@@ -130,12 +126,8 @@ end
 function love.draw()
 	love.graphics.setBackgroundColor(0.6, 0.6, 0.6)
 
-	if game.state == 1 then
-		scenes.mainmenu.draw()
-	elseif game.state == 2 then
-		scenes.selectlevel.draw()
-	elseif game.state == 3 then
-		scenes.game.draw()
+	if scenes[game.state].draw ~= nil then
+		scenes[game.state].draw()
 	end
 
 	love.graphics.setFont(assets.fonts.default)
