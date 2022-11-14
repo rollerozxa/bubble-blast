@@ -8,7 +8,8 @@ function initializeRandom()
 			table.insert(game.bubbles, {
 				x = 32 + 64 * x,
 				y = 64 + 64 * y,
-				state = love.math.random(1,4)
+				state = love.math.random(1,4),
+				blinktimer = 0,
 			})
 		end
 	end
@@ -24,7 +25,8 @@ function initializeLevel()
 		table.insert(game.bubbles, {
 			x = 32 + 64 * (bubble.x - 1),
 			y = 64 + 64 * (bubble.y - 1),
-			state = bubble.state
+			state = bubble.state,
+			blinktimer = 0,
 		})
 	end
 end
@@ -130,9 +132,22 @@ function scenes.game.update()
 end
 
 function scenes.game.draw()
+
 	for _,bubble in pairs(game.bubbles) do
 		love.graphics.draw(assets.bubble[bubble.state], ScaledX(bubble.x), ScaledY(bubble.y), 0, ScaledX(), ScaledY())
-		love.graphics.draw(assets.bubble_eyes, ScaledX(bubble.x), ScaledY(bubble.y), 0, ScaledX(), ScaledY())
+		local eyes
+
+		if bubble.blinktimer == 0 then
+			eyes = assets.bubble_eyes
+
+			if math.random() > 0.995 then
+				bubble.blinktimer = 20
+			end
+		else
+			eyes = assets.eyes_closed
+			bubble.blinktimer = bubble.blinktimer - 1
+		end
+		love.graphics.draw(eyes, ScaledX(bubble.x), ScaledY(bubble.y), 0, ScaledX(), ScaledY())
 	end
 
 	for _,particle in pairs(game.particles) do
