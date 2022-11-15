@@ -30,9 +30,9 @@ function scenes.selectlevel.draw()
 		love.graphics.draw(assets.arrow.left, ScaledX(32), ScaledY(64), 0, ScaledX(), ScaledY())
 	end
 
-	love.graphics.setFont(assets.fonts.defaultMedium)
-	love.graphics.print("Page: "..scenes.selectlevel.page, ScaledX(128), ScaledY(64), 0, ScaledX(), ScaledY())
-	love.graphics.setFont(assets.fonts.default)
+	love.graphics.setFont(fonts.sans.medium)
+	love.graphics.print("Page: "..scenes.selectlevel.page, ScaledX(140), ScaledY(64), 0, ScaledX(), ScaledY())
+	love.graphics.setFont(fonts.sans.small)
 
 	if scenes.selectlevel.page ~= 4 then
 		love.graphics.draw(assets.arrow.right, ScaledX(288), ScaledY(64), 0, ScaledX(), ScaledY())
@@ -48,7 +48,7 @@ function scenes.selectlevel.draw()
 
 		love.graphics.setColor(1,1,1)
 		if levelnum <= game.levelsUnlocked then
-			love.graphics.print(levelnum, ScaledX(x * 64 - 28), ScaledY(128 + y * 64 + 5), 0, ScaledX(), ScaledY())
+			love.graphics.print(levelnum, ScaledX(x * 64 - 30), ScaledY(128 + y * 64 + 1), 0, ScaledX(), ScaledY())
 		else
 			love.graphics.draw(assets.lock, ScaledX(x * 64 - 32), ScaledY(128 + y * 64), 0, ScaledX(), ScaledY())
 		end

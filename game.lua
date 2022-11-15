@@ -165,6 +165,6 @@ function scenes.game.draw()
 		love.graphics.setColor(1,0.6,0.6)
 	end
 
-	love.graphics.setFont(assets.fonts.defaultSmall)
-	love.graphics.print(game.presses.." presses left", 15, 5)
+	love.graphics.setFont(fonts.sans.medium)
+	love.graphics.print(game.presses.." presses left", ScaledX(15), ScaledY(3), 0, ScaledX(), ScaledY())
 end

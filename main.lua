@@ -30,6 +30,7 @@ require("mainmenu")
 require("selectlevel")
 require("util")
 require("savegame")
+require("fonts")
 
 function love.load()
 	local resizable
@@ -62,20 +63,14 @@ function love.load()
 		arrow = {
 			left	= NewImage("arrow_left"),
 			right	= NewImage("arrow_right"),
-		},
-		fonts = {
-			default = love.graphics.newFont(11),
-			defaultSmall = love.graphics.newFont(20),
-			defaultMedium = love.graphics.newFont(24),
-			defaultBig = love.graphics.newFont(40)
 		}
 	}
+
+	fonts = initFonts()
 
 	sounds = {
 		pop = love.audio.newSource("sounds/pop.ogg", "static")
 	}
-
-	love.graphics.setFont(assets.fonts.default)
 
 	savegame.load()
 	if savegame.get('levelsUnlocked') then
@@ -131,7 +126,7 @@ function love.draw()
 		scenes[game.state].draw()
 	end
 
-	love.graphics.setFont(assets.fonts.default)
+	love.graphics.setFont(fonts.sans.medium)
 	love.graphics.setColor(1,1,1)
 
 	if game.debug.grid then
