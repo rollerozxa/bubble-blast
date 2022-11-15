@@ -18,6 +18,10 @@ function NewImage(filename)
 	return love.graphics.newImage("assets/"..filename..".png")
 end
 
+function NewSound(filename)
+	return love.audio.newSource("sounds/"..filename..".ogg", "static")
+end
+
 function TableEmpty(self)
     for _, _ in pairs(self) do
         return false

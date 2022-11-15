@@ -107,7 +107,7 @@ function scenes.game.update()
 		game.particles[key].x = game.particles[key].x + deltaX
 		game.particles[key].y = game.particles[key].y + deltaY
 
-		if not CheckCollision(particle.x, particle.y, 32, 32, 0, 0, game.resolution.x, game.resolution.y) then
+		if not CheckCollision(particle.x, particle.y, 32, 32, 0, 0, game.base_resolution.x, game.base_resolution.y) then
 			game.particles[key] = nil
 		end
 	end
@@ -122,6 +122,8 @@ function scenes.game.update()
 	end
 
 	if TableEmpty(game.bubbles) and TableEmpty(game.particles) then
+		sounds.success:clone():play()
+
 		if game.level == game.levelsUnlocked then
 			game.levelsUnlocked = game.levelsUnlocked + 1
 			savegame.set('levelsUnlocked', game.levelsUnlocked)

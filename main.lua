@@ -69,7 +69,8 @@ function love.load()
 	fonts = initFonts()
 
 	sounds = {
-		pop = love.audio.newSource("sounds/pop.ogg", "static")
+		pop = NewSound("pop"),
+		success = NewSound("success"),
 	}
 
 	savegame.load()
@@ -116,6 +117,10 @@ function love.update()
 			game.state = 2
 		end
 		oldselectdebug = love.keyboard.isDown('s')
+	end
+
+	if love.keyboard.isDown('lctrl') and love.keyboard.isDown('q') then
+		love.event.quit()
 	end
 end
 
