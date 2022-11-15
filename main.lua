@@ -53,6 +53,7 @@ function love.load()
 			NewImage("bubble4")
 		},
 		bubble_eyes = NewImage("bubble_eyes"),
+		eyes_squint = NewImage("eyes_squint"),
 		eyes_closed = NewImage("eyes_closed"),
 		particle	= NewImage("particle"),
 		refresh		= NewImage("refresh"),
@@ -135,7 +136,7 @@ function love.draw()
 	if game.debug.grid then
 		for x = 0,40 do
 			for y = 0,40 do
-				love.graphics.draw(assets.debug_grid, x*32, y*32)
+				love.graphics.draw(assets.debug_grid, ScaledX(x*32), ScaledY(y*32), 0, ScaledX(), ScaledY())
 			end
 		end
 		love.graphics.print("Debug Grid On", 5, 460)

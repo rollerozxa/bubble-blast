@@ -10,6 +10,7 @@ function initializeRandom()
 				y = 64 + 64 * y,
 				state = love.math.random(1,4),
 				blinktimer = 0,
+				hovered = false
 			})
 		end
 	end
@@ -27,6 +28,7 @@ function initializeLevel()
 			y = 64 + 64 * (bubble.y - 1),
 			state = bubble.state,
 			blinktimer = 0,
+			hovered = false
 		})
 	end
 end
@@ -73,11 +75,17 @@ function scenes.game.update()
 				break
 			end
 
-			game.presses = game.presses - 1
+			game.bubbles[key].hovered = true
 
-			breakBubble(key)
+			if MouseClick() then
+				game.presses = game.presses - 1
 
-			break
+				breakBubble(key)
+
+				break
+			end
+		else
+			game.bubbles[key].hovered = false
 		end
 	end
 
@@ -141,7 +149,12 @@ function scenes.game.draw()
 		local eyes
 
 		if bubble.blinktimer == 0 then
-			eyes = assets.bubble_eyes
+			if bubble.hovered then
+				eyes = assets.eyes_squint
+			else
+				eyes = assets.bubble_eyes
+			end
+
 
 			if math.random() > 0.995 then
 				bubble.blinktimer = 20
