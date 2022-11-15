@@ -120,8 +120,6 @@ function love.update()
 end
 
 function love.draw()
-	love.graphics.setBackgroundColor(0.6, 0.6, 0.6)
-
 	if scenes[game.state].draw ~= nil then
 		scenes[game.state].draw()
 	end

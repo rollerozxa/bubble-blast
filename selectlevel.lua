@@ -26,6 +26,8 @@ function scenes.selectlevel.update()
 end
 
 function scenes.selectlevel.draw()
+	love.graphics.setBackgroundColor(64/255, 120/255, 161/255)
+
 	if scenes.selectlevel.page ~= 1 then
 		love.graphics.draw(assets.arrow.left, ScaledX(32), ScaledY(64), 0, ScaledX(), ScaledY())
 	end

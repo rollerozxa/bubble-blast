@@ -9,6 +9,8 @@ function scenes.mainmenu.update()
 end
 
 function scenes.mainmenu.draw()
+	love.graphics.setBackgroundColor(64/255, 148/255, 79/255)
+
 	love.graphics.draw(assets.btn_play, ScaledX(96), ScaledY(320), 0, ScaledX(), ScaledY())
 
 

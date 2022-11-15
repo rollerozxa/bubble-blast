@@ -132,6 +132,7 @@ function scenes.game.update()
 end
 
 function scenes.game.draw()
+	love.graphics.setBackgroundColor(121/255, 64/255, 148/255)
 
 	for _,bubble in pairs(game.bubbles) do
 		love.graphics.draw(assets.bubble[bubble.state], ScaledX(bubble.x), ScaledY(bubble.y), 0, ScaledX(), ScaledY())
@@ -154,7 +155,7 @@ function scenes.game.draw()
 		love.graphics.draw(assets.particle, ScaledX(particle.x), ScaledY(particle.y), 0, ScaledX(), ScaledY())
 	end
 
-	love.graphics.setColor(0.5,0.5,1, 115/255)
+	love.graphics.setColor(0,0,0, 64/255)
 	love.graphics.rectangle('fill', 0, 0, game.resolution.x, ScaledY(32))
 	love.graphics.rectangle('fill', 0, game.resolution.y - ScaledY(32), game.resolution.x, ScaledY(32))
 	love.graphics.setColor(1,1,1)
@@ -162,7 +163,7 @@ function scenes.game.draw()
 	love.graphics.draw(assets.refresh, AnchorTopRight(32), 0, 0, ScaledX(), ScaledY())
 
 	if game.presses == 0 then
-		love.graphics.setColor(1,0.6,0.6)
+		love.graphics.setColor(1,0.2,0.2)
 	end
 
 	love.graphics.setFont(fonts.sans.medium)
