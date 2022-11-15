@@ -62,13 +62,13 @@ function scenes.game.init()
 end
 
 function scenes.game.update()
-	if (love.keyboard.isDown('n') and not oldndown) or CheckMouseCollision(320, 0, 32, 32) then
+	if (love.keyboard.isDown('n') and not oldndown) or MouseCollisionScaled(320, 0, 32, 32) and MouseClick() then
 		scenes.game.init()
 	end
 	oldndown = love.keyboard.isDown('n')
 
 	for key,bubble in pairs(game.bubbles) do
-		if CheckMouseCollision(ScaledX(bubble.x), ScaledY(bubble.y), ScaledX(32), ScaledY(32)) then
+		if MouseCollisionScaled(bubble.x, bubble.y, 32, 32) then
 			if game.presses == 0 then
 				break
 			end

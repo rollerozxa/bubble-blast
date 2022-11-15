@@ -4,11 +4,11 @@ scenes.selectlevel = {}
 scenes.selectlevel.page = 1
 
 function scenes.selectlevel.update()
-	if CheckMouseCollisionScaled(32, 64, 32, 32) and scenes.selectlevel.page ~= 1 then
+	if MouseCollisionScaled(32, 64, 32, 32) and MouseClick() and scenes.selectlevel.page ~= 1 then
 		scenes.selectlevel.page = scenes.selectlevel.page - 1
 	end
 
-	if CheckMouseCollisionScaled(288, 64, 32, 32) and scenes.selectlevel.page ~= 4 then
+	if MouseCollisionScaled(288, 64, 32, 32) and MouseClick() and scenes.selectlevel.page ~= 4 then
 		scenes.selectlevel.page = scenes.selectlevel.page + 1
 	end
 
@@ -17,7 +17,7 @@ function scenes.selectlevel.update()
 		local y = math.floor(i / 5)
 		local levelnum = ((scenes.selectlevel.page - 1) * 25 ) + i + 1
 
-		if CheckMouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) and levelnum <= game.levelsUnlocked then
+		if MouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) and MouseClick() and levelnum <= game.levelsUnlocked then
 			game.level = levelnum
 			game.state = "game"
 			game.newlyState = true

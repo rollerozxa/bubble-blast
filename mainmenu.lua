@@ -2,7 +2,7 @@
 scenes.mainmenu = {}
 
 function scenes.mainmenu.update()
-	if CheckMouseCollisionScaled(96, 320, 160, 32) then
+	if MouseCollisionScaled(96, 320, 160, 32) and MouseClick() then
 		game.state = "selectlevel"
 		game.newlyState = true
 	end

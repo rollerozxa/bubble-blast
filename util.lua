@@ -6,12 +6,16 @@ function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
 		and	y2 < y1+h1
 end
 
-function CheckMouseCollision(x,y,w,h)
-	return CheckCollision(x, y, w, h, love.mouse.getX(), love.mouse.getY(), 4, 4) and love.mouse.isDown(1) and not oldmousedown
+function MouseCollision(x,y,w,h)
+	return CheckCollision(x, y, w, h, love.mouse.getX(), love.mouse.getY(), 4, 4)
 end
 
-function CheckMouseCollisionScaled(x,y,w,h)
-	return CheckMouseCollision(ScaledX(x), ScaledY(y), ScaledX(w), ScaledY(h))
+function MouseCollisionScaled(x,y,w,h)
+	return MouseCollision(ScaledX(x), ScaledY(y), ScaledX(w), ScaledY(h))
+end
+
+function MouseClick()
+	return love.mouse.isDown(1) and not oldmousedown
 end
 
 function NewImage(filename)
