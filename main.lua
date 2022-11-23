@@ -57,7 +57,6 @@ function love.load()
 		eyes_closed = NewImage("eyes_closed"),
 		particle	= NewImage("particle"),
 		refresh		= NewImage("refresh"),
-		btn_play	= NewImage("btn_play"),
 		debug_grid	= NewImage("_debug_grid"),
 		lvlok		= NewImage("lvlok"),
 		lock		= NewImage("lock"),
