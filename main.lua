@@ -47,30 +47,30 @@ function love.load()
 
 	assets = {
 		bubble = {
-			NewImage("bubble1"),
-			NewImage("bubble2"),
-			NewImage("bubble3"),
-			NewImage("bubble4")
+			newImage("bubble1"),
+			newImage("bubble2"),
+			newImage("bubble3"),
+			newImage("bubble4")
 		},
-		bubble_eyes = NewImage("bubble_eyes"),
-		eyes_squint = NewImage("eyes_squint"),
-		eyes_closed = NewImage("eyes_closed"),
-		particle	= NewImage("particle"),
-		refresh		= NewImage("refresh"),
-		debug_grid	= NewImage("_debug_grid"),
-		lvlok		= NewImage("lvlok"),
-		lock		= NewImage("lock"),
+		bubble_eyes = newImage("bubble_eyes"),
+		eyes_squint = newImage("eyes_squint"),
+		eyes_closed = newImage("eyes_closed"),
+		particle	= newImage("particle"),
+		refresh		= newImage("refresh"),
+		debug_grid	= newImage("_debug_grid"),
+		lvlok		= newImage("lvlok"),
+		lock		= newImage("lock"),
 		arrow = {
-			left	= NewImage("arrow_left"),
-			right	= NewImage("arrow_right"),
+			left	= newImage("arrow_left"),
+			right	= newImage("arrow_right"),
 		}
 	}
 
 	fonts = initFonts()
 
 	sounds = {
-		pop = NewSound("pop"),
-		success = NewSound("success"),
+		pop = newSound("pop"),
+		success = newSound("success"),
 	}
 
 	savegame.load()
@@ -135,7 +135,7 @@ function love.draw()
 	if game.debug.grid then
 		for x = 0,40 do
 			for y = 0,40 do
-				love.graphics.draw(assets.debug_grid, ScaledX(x*32), ScaledY(y*32), 0, ScaledX(), ScaledY())
+				love.graphics.draw(assets.debug_grid, scaledX(x*32), scaledY(y*32), 0, scaledX(), scaledY())
 			end
 		end
 		love.graphics.print("Debug Grid On", 5, 460)

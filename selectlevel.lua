@@ -4,11 +4,11 @@ scenes.selectlevel = {}
 scenes.selectlevel.page = 1
 
 function scenes.selectlevel.update()
-	if MouseCollisionScaled(32, 64, 32, 32) and MouseClick() and scenes.selectlevel.page ~= 1 then
+	if mouseCollisionScaled(32, 64, 32, 32) and mouseClick() and scenes.selectlevel.page ~= 1 then
 		scenes.selectlevel.page = scenes.selectlevel.page - 1
 	end
 
-	if MouseCollisionScaled(288, 64, 32, 32) and MouseClick() and scenes.selectlevel.page ~= 4 then
+	if mouseCollisionScaled(288, 64, 32, 32) and mouseClick() and scenes.selectlevel.page ~= 4 then
 		scenes.selectlevel.page = scenes.selectlevel.page + 1
 	end
 
@@ -17,7 +17,7 @@ function scenes.selectlevel.update()
 		local y = math.floor(i / 5)
 		local levelnum = ((scenes.selectlevel.page - 1) * 25 ) + i + 1
 
-		if MouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) and MouseClick() and levelnum <= game.levelsUnlocked then
+		if mouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) and mouseClick() and levelnum <= game.levelsUnlocked then
 			game.level = levelnum
 			switchState("game")
 		end
@@ -28,15 +28,15 @@ function scenes.selectlevel.draw()
 	love.graphics.setBackgroundColor(64/255, 120/255, 161/255)
 
 	if scenes.selectlevel.page ~= 1 then
-		love.graphics.draw(assets.arrow.left, ScaledX(32), ScaledY(64), 0, ScaledX(), ScaledY())
+		love.graphics.draw(assets.arrow.left, scaledX(32), scaledY(64), 0, scaledX(), scaledY())
 	end
 
 	love.graphics.setFont(fonts.sans.medium)
-	love.graphics.print("Page: "..scenes.selectlevel.page, ScaledX(136), ScaledY(69), 0, ScaledX(), ScaledY())
+	love.graphics.print("Page: "..scenes.selectlevel.page, scaledX(136), scaledY(69), 0, scaledX(), scaledY())
 	love.graphics.setFont(fonts.sans.small)
 
 	if scenes.selectlevel.page ~= 4 then
-		love.graphics.draw(assets.arrow.right, ScaledX(288), ScaledY(64), 0, ScaledX(), ScaledY())
+		love.graphics.draw(assets.arrow.right, scaledX(288), scaledY(64), 0, scaledX(), scaledY())
 	end
 
 	for i = 0,24 do
@@ -44,23 +44,23 @@ function scenes.selectlevel.draw()
 		local y = math.floor(i / 5)
 		local levelnum = ((scenes.selectlevel.page - 1) * 25 ) + i + 1
 
-		if MouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) then
+		if mouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) then
 			love.graphics.setColor(0,0,0.1)
 		else
 			love.graphics.setColor(0.1,0.1,0.1)
 		end
 
-		love.graphics.rectangle('fill', ScaledX(x * 64 - 32), ScaledY(128 + y * 64), ScaledX(32), ScaledY(32))
+		love.graphics.rectangle('fill', scaledX(x * 64 - 32), scaledY(128 + y * 64), scaledX(32), scaledY(32))
 
 		love.graphics.setColor(1,1,1)
 		if levelnum <= game.levelsUnlocked then
-			love.graphics.print(levelnum, ScaledX(x * 64 - 30), ScaledY(128 + y * 64 + 1), 0, ScaledX(), ScaledY())
+			love.graphics.print(levelnum, scaledX(x * 64 - 30), scaledY(128 + y * 64 + 1), 0, scaledX(), scaledY())
 		else
-			love.graphics.draw(assets.lock, ScaledX(x * 64 - 32), ScaledY(128 + y * 64), 0, ScaledX(), ScaledY())
+			love.graphics.draw(assets.lock, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(), scaledY())
 		end
 
 		if levelnum < game.levelsUnlocked then
-			love.graphics.draw(assets.lvlok, ScaledX(x * 64 - 32), ScaledY(128 + y * 64), 0, ScaledX(), ScaledY())
+			love.graphics.draw(assets.lvlok, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(), scaledY())
 		end
 	end
 end
