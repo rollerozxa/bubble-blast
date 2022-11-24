@@ -19,8 +19,7 @@ function scenes.selectlevel.update()
 
 		if MouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) and MouseClick() and levelnum <= game.levelsUnlocked then
 			game.level = levelnum
-			game.state = "game"
-			game.newlyState = true
+			switchState("game")
 		end
 	end
 end

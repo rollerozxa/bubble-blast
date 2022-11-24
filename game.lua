@@ -136,8 +136,7 @@ function scenes.game.update()
 			game.levelsUnlocked = game.levelsUnlocked + 1
 			savegame.set('levelsUnlocked', game.levelsUnlocked)
 		end
-		game.state = "selectlevel"
-		game.newlyState = true
+		switchState("selectlevel")
 	end
 end
 

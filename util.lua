@@ -55,3 +55,8 @@ function drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)
 	local textHeight = font:getHeight()
 	love.graphics.print(text, rectX+rectWidth/2, rectY+rectHeight/2, 0, ScaledX(), ScaledY(), textWidth/2, textHeight/2)
 end
+
+function switchState(state)
+	game.state = state
+	game.newlyState = true
+end

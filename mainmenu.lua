@@ -12,8 +12,7 @@ gui = {
 		},
 		label = "Play",
 		on_click = function()
-			game.state = "selectlevel"
-			game.newlyState = true
+			switchState("selectlevel")
 		end
 	},
 	settingsbtn = {
