@@ -29,15 +29,27 @@ end
 function scenes.selectlevel.draw()
 	love.graphics.setBackgroundColor(64/255, 120/255, 161/255)
 
-	if scenes.selectlevel.page ~= 1 then
-		love.graphics.draw(assets.arrow.left, scaledX(32), scaledY(64), 0, scaledX(), scaledY())
-	end
-
 	love.graphics.setFont(fonts.sans.medium)
 	love.graphics.print("Page: "..scenes.selectlevel.page, scaledX(136), scaledY(69), 0, scaledX(), scaledY())
 	love.graphics.setFont(fonts.sans.small)
 
+	if scenes.selectlevel.page ~= 1 then
+		if mouseCollisionScaled(32, 64, 32, 32) then
+			love.graphics.setColor(0.1,0.1,0.1)
+		else
+			love.graphics.setColor(1,1,1)
+		end
+
+		love.graphics.draw(assets.arrow.left, scaledX(32), scaledY(64), 0, scaledX(), scaledY())
+	end
+
 	if scenes.selectlevel.page ~= 4 then
+		if mouseCollisionScaled(288, 64, 32, 32) then
+			love.graphics.setColor(0.1,0.1,0.1)
+		else
+			love.graphics.setColor(1,1,1)
+		end
+
 		love.graphics.draw(assets.arrow.right, scaledX(288), scaledY(64), 0, scaledX(), scaledY())
 	end
 
