@@ -1,4 +1,6 @@
 
+-- savegame.lua: Savegame functionality
+
 savegame = {
 	data = {}
 }

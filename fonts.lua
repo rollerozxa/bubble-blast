@@ -1,6 +1,7 @@
 
+-- fonts.lua: Font loading
 
-function newFont(name, size)
+local function newFont(name, size)
 	return love.graphics.newFont("fonts/"..name..".ttf", size)
 end
 

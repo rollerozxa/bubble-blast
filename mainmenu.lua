@@ -1,7 +1,9 @@
 
+-- mainmenu.lua: Main menu scene
+
 scenes.mainmenu = {}
 
-gui = {
+local gui = {
 	playbtn = {
 		type = "button",
 		x = 96,

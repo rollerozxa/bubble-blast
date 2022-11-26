@@ -1,4 +1,6 @@
 
+-- game.lua: The main game scene
+
 scenes.game = {}
 
 function initializeRandom()

@@ -1,4 +1,6 @@
 
+-- main.lua: Main script, take care of scenes and initialisations.
+
 game = {
 	resolution = {
 		x = 352,

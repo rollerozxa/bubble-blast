@@ -1,3 +1,6 @@
+
+-- Utility script to convert original Bubble Blast levels into the format used by LÖVE Blast.
+
 json = require("misc.json")
 
 for pack = 1,100 do
