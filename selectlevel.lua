@@ -6,6 +6,10 @@ scenes.selectlevel = {}
 scenes.selectlevel.page = 1
 
 function scenes.selectlevel.update()
+	if mouseCollisionScaled(0, 0, 64, 32) and mouseClick() then
+		switchState("mainmenu")
+	end
+
 	if mouseCollisionScaled(32, 64, 32, 32) and mouseClick() and scenes.selectlevel.page ~= 1 then
 		scenes.selectlevel.page = scenes.selectlevel.page - 1
 	end
@@ -32,6 +36,16 @@ function scenes.selectlevel.draw()
 	love.graphics.setFont(fonts.sans.medium)
 	love.graphics.print("Page: "..scenes.selectlevel.page, scaledX(136), scaledY(69), 0, scaledX(), scaledY())
 	love.graphics.setFont(fonts.sans.small)
+
+	do
+		if mouseCollisionScaled(0, 0, 64, 32) then
+			love.graphics.setColor(0.1,0.1,0.1)
+		else
+			love.graphics.setColor(1,1,1)
+		end
+
+		love.graphics.draw(assets.backbtn, 0, 0, 0, scaledX(), scaledY())
+	end
 
 	if scenes.selectlevel.page ~= 1 then
 		if mouseCollisionScaled(32, 64, 32, 32) then

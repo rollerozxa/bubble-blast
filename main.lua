@@ -63,6 +63,7 @@ function love.load()
 		debug_grid	= newImage("_debug_grid"),
 		lvlok		= newImage("lvlok"),
 		lock		= newImage("lock"),
+		backbtn		= newImage("back_btn"),
 		arrow = {
 			left	= newImage("arrow_left"),
 			right	= newImage("arrow_right"),
