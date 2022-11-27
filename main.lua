@@ -33,6 +33,7 @@ require("selectlevel")
 require("util")
 require("savegame")
 require("fonts")
+require("gtk")
 
 function love.load()
 	local resizable
