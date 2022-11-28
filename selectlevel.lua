@@ -5,18 +5,45 @@ scenes.selectlevel = {}
 
 scenes.selectlevel.page = 1
 
+local gui = {
+	back_button = {
+		type = "tex_button",
+		x = 0, y = 0,
+		size = { x = 64, y = 32 },
+		texture = "back_btn",
+		on_click = function()
+			switchState("mainmenu")
+		end
+	},
+
+	prev_button = {
+		type = "tex_button",
+		x = 32, y = 64,
+		size = { x = 32, y = 32 },
+		texture = "arrow_left",
+		on_click = function()
+			scenes.selectlevel.page = scenes.selectlevel.page - 1
+		end,
+		is_visible = function()
+			return scenes.selectlevel.page ~= 1
+		end
+	},
+	next_button = {
+		type = "tex_button",
+		x = 288, y = 64,
+		size = { x = 32, y = 32 },
+		texture = "arrow_right",
+		on_click = function()
+			scenes.selectlevel.page = scenes.selectlevel.page + 1
+		end,
+		is_visible = function()
+			return scenes.selectlevel.page ~= 4
+		end
+	},
+}
+
 function scenes.selectlevel.update()
-	if mouseCollisionScaled(0, 0, 64, 32) and mouseClick() then
-		switchState("mainmenu")
-	end
-
-	if mouseCollisionScaled(32, 64, 32, 32) and mouseClick() and scenes.selectlevel.page ~= 1 then
-		scenes.selectlevel.page = scenes.selectlevel.page - 1
-	end
-
-	if mouseCollisionScaled(288, 64, 32, 32) and mouseClick() and scenes.selectlevel.page ~= 4 then
-		scenes.selectlevel.page = scenes.selectlevel.page + 1
-	end
+	gtk.update(gui)
 
 	for i = 0,24 do
 		local x = (i % 5) + 1
@@ -37,35 +64,7 @@ function scenes.selectlevel.draw()
 	love.graphics.print("Page: "..scenes.selectlevel.page, scaledX(136), scaledY(69), 0, scaledX(), scaledY())
 	love.graphics.setFont(fonts.sans.small)
 
-	do
-		if mouseCollisionScaled(0, 0, 64, 32) then
-			love.graphics.setColor(0.1,0.1,0.1)
-		else
-			love.graphics.setColor(1,1,1)
-		end
-
-		love.graphics.draw(assets.backbtn, 0, 0, 0, scaledX(), scaledY())
-	end
-
-	if scenes.selectlevel.page ~= 1 then
-		if mouseCollisionScaled(32, 64, 32, 32) then
-			love.graphics.setColor(0.1,0.1,0.1)
-		else
-			love.graphics.setColor(1,1,1)
-		end
-
-		love.graphics.draw(assets.arrow.left, scaledX(32), scaledY(64), 0, scaledX(), scaledY())
-	end
-
-	if scenes.selectlevel.page ~= 4 then
-		if mouseCollisionScaled(288, 64, 32, 32) then
-			love.graphics.setColor(0.1,0.1,0.1)
-		else
-			love.graphics.setColor(1,1,1)
-		end
-
-		love.graphics.draw(assets.arrow.right, scaledX(288), scaledY(64), 0, scaledX(), scaledY())
-	end
+	gtk.draw(gui)
 
 	for i = 0,24 do
 		local x = (i % 5) + 1
