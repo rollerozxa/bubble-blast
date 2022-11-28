@@ -27,10 +27,14 @@ scenes = {}
 
 json = require("misc.json")
 
+require("i18n")
+
+require("util")
+
 require("game")
 require("mainmenu")
 require("selectlevel")
-require("util")
+
 require("savegame")
 require("fonts")
 require("gtk")

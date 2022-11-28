@@ -6,26 +6,18 @@ scenes.mainmenu = {}
 local gui = {
 	playbtn = {
 		type = "button",
-		x = 96,
-		y = 288,
-		size = {
-			x = 160,
-			y = 32
-		},
-		label = "Play",
+		x = 96, y = 288,
+		size = { x = 160, y = 32 },
+		label = S("Play"),
 		on_click = function()
 			switchState("selectlevel")
 		end
 	},
 	settingsbtn = {
 		type = "button",
-		x = 96,
-		y = 352,
-		size = {
-			x = 160,
-			y = 32
-		},
-		label = "Settings",
+		x = 96, y = 352,
+		size = { x = 160, y = 32 },
+		label = S("Settings"),
 		on_click = function()
 			-- dummy
 		end
