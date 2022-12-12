@@ -143,7 +143,7 @@ function scenes.game.update()
 end
 
 function scenes.game.draw()
-	love.graphics.setBackgroundColor(121/255, 64/255, 148/255)
+	drawBG(121/255, 64/255, 148/255)
 
 	for _,bubble in pairs(game.bubbles) do
 		love.graphics.draw(assets.bubble[bubble.state], scaledX(bubble.x), scaledY(bubble.y), 0, scaledX(), scaledY())

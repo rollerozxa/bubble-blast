@@ -29,7 +29,7 @@ function scenes.mainmenu.update()
 end
 
 function scenes.mainmenu.draw()
-	love.graphics.setBackgroundColor(64/255, 148/255, 79/255)
+	drawBG(64/255, 148/255, 79/255)
 
 	gtk.draw(gui)
 

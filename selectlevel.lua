@@ -58,7 +58,7 @@ function scenes.selectlevel.update()
 end
 
 function scenes.selectlevel.draw()
-	love.graphics.setBackgroundColor(64/255, 120/255, 161/255)
+	drawBG(64/255, 120/255, 161/255)
 
 	love.graphics.setFont(fonts.sans.medium)
 	love.graphics.print("Page: "..scenes.selectlevel.page, scaledX(136), scaledY(69), 0, scaledX(), scaledY())

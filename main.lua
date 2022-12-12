@@ -85,6 +85,11 @@ function love.load()
 	end
 end
 
+offset = {
+	x = 0,
+	y = 0
+}
+
 function love.update()
 	if game.newlyState then
 		if scenes[game.state].init ~= nil then
@@ -131,6 +136,8 @@ function love.update()
 end
 
 function love.draw()
+	love.graphics.translate(offset.x, offset.y)
+
 	if scenes[game.state].draw ~= nil then
 		scenes[game.state].draw()
 	end
@@ -156,8 +163,14 @@ function love.resize(w, h)
 	game.resolution.x = w
 	game.resolution.y = h
 
-	-- Hack for ultratall devices like my Nokia 5.4.
-	if game.resolution.y / game.resolution.x > 2 then
+	if game.resolution.y / game.resolution.x > 1.36 then
 		game.resolution.y = math.ceil(game.resolution.x * 1.36)
 	end
+
+	if game.resolution.y / game.resolution.x < 1.36 then
+		game.resolution.x = math.ceil(game.resolution.y * 0.733)
+	end
+
+	offset.x = (w - game.resolution.x) / 2
+	offset.y = (h - game.resolution.y) / 2
 end

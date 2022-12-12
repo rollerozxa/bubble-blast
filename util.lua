@@ -9,7 +9,7 @@ function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2)
 end
 
 function mouseCollision(x,y,w,h)
-	return checkCollision(x, y, w, h, love.mouse.getX(), love.mouse.getY(), 4, 4)
+	return checkCollision(x+offset.x, y+offset.y, w, h, love.mouse.getX(), love.mouse.getY(), 4, 4)
 end
 
 function mouseCollisionScaled(x,y,w,h)
@@ -56,6 +56,15 @@ function drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)
 	local textWidth  = font:getWidth(text)
 	local textHeight = font:getHeight()
 	love.graphics.print(text, rectX+rectWidth/2, rectY+rectHeight/2, 0, scaledX(), scaledY(), textWidth/2, textHeight/2)
+end
+
+function drawBG(r,g,b)
+	love.graphics.setColor(r/2,g/2,b/2)
+	love.graphics.rectangle('fill', 0-offset.x, 0-offset.y, game.resolution.x+(offset.x*2), game.resolution.y+(offset.y*2))
+	love.graphics.setColor(r,g,b)
+	love.graphics.rectangle('fill', 0, 0, game.resolution.x, game.resolution.y)
+
+	love.graphics.setColor(1,1,1)
 end
 
 function switchState(state)
