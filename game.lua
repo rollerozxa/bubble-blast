@@ -6,6 +6,20 @@ scenes.game = {}
 local bubbles = {}
 local particles = {}
 local presses = 0
+
+local gui = {
+	reload = {
+		type = "tex_button",
+		x = 320, y = 0,
+		size = { x = 32, y = 32 },
+		texture = "refresh",
+		on_click = function()
+			scenes.game.init()
+		end,
+		keybind = 'n'
+	},
+}
+
 -- Helper functions
 
 local function initializeRandom()
@@ -71,10 +85,7 @@ function scenes.game.init()
 end
 
 function scenes.game.update()
-	if (love.keyboard.isDown('n') and not oldndown) or mouseCollisionScaled(320, 0, 32, 32) and mouseClick() then
-		scenes.game.init()
-	end
-	oldndown = love.keyboard.isDown('n')
+	gtk.update(gui)
 
 	for key,bubble in pairs(bubbles) do
 		if mouseCollisionScaled(bubble.x, bubble.y, 32, 32) then
@@ -168,12 +179,12 @@ function scenes.game.draw()
 	love.graphics.rectangle('fill', 0, game.resolution.y - scaledY(32), game.resolution.x, scaledY(32))
 	love.graphics.setColor(1,1,1)
 
-	love.graphics.draw(assets.refresh, anchorTopRight(32), 0, 0, scaledX(), scaledY())
-
 	if presses == 0 then
 		love.graphics.setColor(1,0.2,0.2)
 	end
 
 	love.graphics.setFont(fonts.sans.medium)
 	love.graphics.print(presses.." presses left", scaledX(15), scaledY(3), 0, scaledX(), scaledY())
+
+	gtk.draw(gui)
 end

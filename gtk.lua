@@ -4,11 +4,18 @@
 
 gtk = {}
 
+local sparsifier = {}
+
 function gtk.update(gui)
 	for id, el in pairs(gui) do
 		if not el.is_visible or el.is_visible() then
-			if mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and mouseClick() then
+			if (mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and mouseClick())
+			 or (el.keybind and love.keyboard.isDown(el.keybind) and not sparsifier[id]) then
 				el.on_click()
+			end
+
+			if el.keybind then
+				sparsifier[id] = love.keyboard.isDown(el.keybind)
 			end
 		end
 	end

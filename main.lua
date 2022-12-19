@@ -25,6 +25,9 @@ offset = {
 	y = 0
 }
 
+sparsifier = {}
+oldmousedown = false
+
 scenes = {}
 
 json = require("misc.json")
