@@ -47,10 +47,6 @@ function scaledY(y)
 	return y * game.resolution.y / game.base_resolution.y
 end
 
-function anchorTopRight(offsetX)
-	return game.resolution.x - scaledX(offsetX)
-end
-
 function drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)
 	local font       = love.graphics.getFont()
 	local textWidth  = font:getWidth(text)
