@@ -14,10 +14,6 @@ game = {
 	levelsUnlocked = 1,
 	state = "mainmenu",
 	newlyState = true,
-	debug = {
-		grid = false,
-		info = false
-	}
 }
 
 offset = {
@@ -43,6 +39,8 @@ require("selectlevel")
 require("savegame")
 require("fonts")
 require("gtk")
+
+local avlusn = require('avlusn')
 
 function love.load()
 	-- LÖVE for Android turns the screen to landscape if resizable is true. We do not want this.
@@ -101,28 +99,13 @@ function love.update()
 	oldmousedown = love.mouse.isDown(1)
 
 	if love.keyboard.isDown('f3') then
-		if love.keyboard.isDown('g') and not oldgriddebug then
-			if game.debug.grid then
-				game.debug.grid = false
-			else
-				game.debug.grid = true
+		for id, def in pairs(avlusn) do
+			print(id)
+			if love.keyboard.isDown(def.keybind) and not sparsifier[def.keybind] then
+				avlusn[id].enabled = not avlusn[id].enabled
 			end
+			sparsifier[def.keybind] = love.keyboard.isDown(def.keybind)
 		end
-		oldgriddebug = love.keyboard.isDown('g')
-
-		if love.keyboard.isDown('f') and not oldinfodebug then
-			if game.debug.info then
-				game.debug.info = false
-			else
-				game.debug.info = true
-			end
-		end
-		oldinfodebug = love.keyboard.isDown('f')
-
-		if love.keyboard.isDown('s') and not oldselectdebug then
-			game.state = 2
-		end
-		oldselectdebug = love.keyboard.isDown('s')
 	end
 
 	if love.keyboard.isDown('lctrl') and love.keyboard.isDown('q') then
@@ -140,17 +123,10 @@ function love.draw()
 	love.graphics.setFont(fonts.sans.medium)
 	love.graphics.setColor(1,1,1)
 
-	if game.debug.grid then
-		for x = 0,40 do
-			for y = 0,40 do
-				love.graphics.draw(assets.debug_grid, scaledX(x*32), scaledY(y*32), 0, scaledX(), scaledY())
-			end
+	for id, def in pairs(avlusn) do
+		if def.enabled then
+			def.draw()
 		end
-		love.graphics.print("Debug Grid On", 5, 460)
-	end
-
-	if game.debug.info then
-		love.graphics.print("FPS: "..love.timer.getFPS()..", Running at "..game.resolution.x.."x"..game.resolution.y, 5, 10)
 	end
 end
 
