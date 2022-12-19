@@ -71,3 +71,23 @@ function switchState(state)
 	game.state = state
 	game.newlyState = true
 end
+
+function dirToDelta(dir, speed)
+	local deltaX, deltaY
+
+	if dir == 'up' then
+		deltaX = 0
+		deltaY = -speed
+	elseif dir == 'left' then
+		deltaX = -speed
+		deltaY = 0
+	elseif dir == 'down' then
+		deltaX = 0
+		deltaY = speed
+	elseif dir == 'right' then
+		deltaX = speed
+		deltaY = 0
+	end
+
+	return deltaX, deltaY
+end

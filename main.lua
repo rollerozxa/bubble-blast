@@ -12,15 +12,17 @@ game = {
 	},
 	level = 1,
 	levelsUnlocked = 1,
-	presses = 0,
-	bubbles = {},
-	particles = {},
 	state = "mainmenu",
 	newlyState = true,
 	debug = {
 		grid = false,
 		info = false
 	}
+}
+
+offset = {
+	x = 0,
+	y = 0
 }
 
 scenes = {}
@@ -40,17 +42,12 @@ require("fonts")
 require("gtk")
 
 function love.load()
-	local resizable
 	-- LÖVE for Android turns the screen to landscape if resizable is true. We do not want this.
-	if love.system.getOS() == 'Android' then
-		resizable = false
-	else
-		resizable = true
-	end
+	local resizable = love.system.getOS() ~= 'Android'
 
 	love.window.setMode(game.resolution.x, game.resolution.y, { resizable = resizable })
 	love.window.setTitle("Bubble Blast")
-	love.graphics.setDefaultFilter( 'nearest', 'nearest', 4 )
+	love.graphics.setDefaultFilter('nearest', 'nearest', 4)
 
 	assets = {
 		bubble = {
@@ -84,11 +81,6 @@ function love.load()
 		game.levelsUnlocked = savegame.get('levelsUnlocked')
 	end
 end
-
-offset = {
-	x = 0,
-	y = 0
-}
 
 function love.update()
 	if game.newlyState then

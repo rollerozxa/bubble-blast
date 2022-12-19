@@ -3,11 +3,16 @@
 
 scenes.game = {}
 
-function initializeRandom()
-	game.bubbles = {}
+local bubbles = {}
+local particles = {}
+local presses = 0
+-- Helper functions
+
+local function initializeRandom()
+	bubbles = {}
 	for x = 0,4 do
 		for y = 0,5 do
-			table.insert(game.bubbles, {
+			table.insert(bubbles, {
 				x = 32 + 64 * x,
 				y = 64 + 64 * y,
 				state = love.math.random(1,4),
@@ -18,14 +23,14 @@ function initializeRandom()
 	end
 end
 
-function initializeLevel()
+local function initializeLevel()
 	local leveljson = love.filesystem.read("levelpacks/1/"..game.level..".json")
 	local leveldata = json.decode(leveljson)
 
-	game.presses = leveldata.presses
-	game.bubbles = {}
+	presses = leveldata.presses
+	bubbles = {}
 	for _,bubble in pairs(leveldata.bubbles) do
-		table.insert(game.bubbles, {
+		table.insert(bubbles, {
 			x = 32 + 64 * (bubble.x - 1),
 			y = 64 + 64 * (bubble.y - 1),
 			state = bubble.state,
@@ -35,20 +40,18 @@ function initializeLevel()
 	end
 end
 
-function breakBubble(key)
-	local bubble = game.bubbles[key]
+local function breakBubble(key)
+	local bubble = bubbles[key]
 
 	if bubble.state < 4 then
-		game.bubbles[key].state = bubble.state + 1
+		bubbles[key].state = bubble.state + 1
 	else
 		sounds.pop:clone():play()
 
-		game.bubbles[key] = nil
+		bubbles[key] = nil
 
-		local dirs = { 'up', 'left', 'down', 'right' }
-
-		for _,dir in pairs(dirs) do
-			table.insert(game.particles, {
+		for _,dir in ipairs({ 'up', 'left', 'down', 'right' }) do
+			table.insert(particles, {
 				x = bubble.x,
 				y = bubble.y,
 				dir = dir
@@ -56,6 +59,8 @@ function breakBubble(key)
 		end
 	end
 end
+
+-- Game scene functions
 
 function scenes.game.init()
 	if game.level == 0 then
@@ -71,67 +76,54 @@ function scenes.game.update()
 	end
 	oldndown = love.keyboard.isDown('n')
 
-	for key,bubble in pairs(game.bubbles) do
+	for key,bubble in pairs(bubbles) do
 		if mouseCollisionScaled(bubble.x, bubble.y, 32, 32) then
-			if game.presses == 0 then
+			if presses == 0 then
 				break
 			end
 
-			game.bubbles[key].hovered = true
+			bubbles[key].hovered = true
 
 			if mouseClick() then
-				game.presses = game.presses - 1
+				presses = presses - 1
 
 				breakBubble(key)
 
 				break
 			end
 		else
-			game.bubbles[key].hovered = false
+			bubbles[key].hovered = false
 		end
 	end
 
-	for key,particle in pairs(game.particles) do
+	for key,particle in pairs(particles) do
 		local speed
-		if tableEmpty(game.bubbles) then
+		if tableEmpty(bubbles) then
 			speed = 8
 		else
 			speed = 3
 		end
-		local deltaX, deltaY
 
-		if particle.dir == 'up' then
-			deltaX = 0
-			deltaY = -speed
-		elseif particle.dir == 'left' then
-			deltaX = -speed
-			deltaY = 0
-		elseif particle.dir == 'down' then
-			deltaX = 0
-			deltaY = speed
-		elseif particle.dir == 'right' then
-			deltaX = speed
-			deltaY = 0
-		end
+		local deltaX, deltaY = dirToDelta(particle.dir, speed)
 
-		game.particles[key].x = game.particles[key].x + deltaX
-		game.particles[key].y = game.particles[key].y + deltaY
+		particles[key].x = particles[key].x + deltaX
+		particles[key].y = particles[key].y + deltaY
 
 		if not checkCollision(particle.x, particle.y, 32, 32, 0, 0, game.base_resolution.x, game.base_resolution.y) then
-			game.particles[key] = nil
+			particles[key] = nil
 		end
 	end
 
-	for particleKey,particle in pairs(game.particles) do
-		for bubbleKey,bubble in pairs(game.bubbles) do
+	for particleKey,particle in pairs(particles) do
+		for bubbleKey,bubble in pairs(bubbles) do
 			if checkCollision(particle.x +7, particle.y +7, 18, 18, bubble.x, bubble.y, 32, 32) then
 				breakBubble(bubbleKey)
-				game.particles[particleKey] = nil
+				particles[particleKey] = nil
 			end
 		end
 	end
 
-	if tableEmpty(game.bubbles) and tableEmpty(game.particles) then
+	if tableEmpty(bubbles) and tableEmpty(particles) then
 		sounds.success:clone():play()
 
 		if game.level == game.levelsUnlocked then
@@ -145,7 +137,7 @@ end
 function scenes.game.draw()
 	drawBG(121/255, 64/255, 148/255)
 
-	for _,bubble in pairs(game.bubbles) do
+	for _,bubble in pairs(bubbles) do
 		love.graphics.draw(assets.bubble[bubble.state], scaledX(bubble.x), scaledY(bubble.y), 0, scaledX(), scaledY())
 		local eyes
 
@@ -167,7 +159,7 @@ function scenes.game.draw()
 		love.graphics.draw(eyes, scaledX(bubble.x), scaledY(bubble.y), 0, scaledX(), scaledY())
 	end
 
-	for _,particle in pairs(game.particles) do
+	for _,particle in pairs(particles) do
 		love.graphics.draw(assets.particle, scaledX(particle.x), scaledY(particle.y), 0, scaledX(), scaledY())
 	end
 
@@ -178,10 +170,10 @@ function scenes.game.draw()
 
 	love.graphics.draw(assets.refresh, anchorTopRight(32), 0, 0, scaledX(), scaledY())
 
-	if game.presses == 0 then
+	if presses == 0 then
 		love.graphics.setColor(1,0.2,0.2)
 	end
 
 	love.graphics.setFont(fonts.sans.medium)
-	love.graphics.print(game.presses.." presses left", scaledX(15), scaledY(3), 0, scaledX(), scaledY())
+	love.graphics.print(presses.." presses left", scaledX(15), scaledY(3), 0, scaledX(), scaledY())
 end
