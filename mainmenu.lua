@@ -19,7 +19,7 @@ local gui = {
 		size = { x = 160, y = 32 },
 		label = S("Settings"),
 		on_click = function()
-			-- dummy
+			switchState("settings")
 		end
 	}
 }

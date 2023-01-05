@@ -56,7 +56,7 @@ end
 
 function drawBG(r,g,b)
 	love.graphics.setColor(r/2,g/2,b/2)
-	love.graphics.rectangle('fill', 0-offset.x, 0-offset.y, game.resolution.x+(offset.x*2), game.resolution.y+(offset.y*2))
+	love.graphics.rectangle('fill', 0-offset.x, 0-offset.y, love.graphics.getWidth()+(offset.x*2), love.graphics.getHeight()+(offset.y*2))
 	love.graphics.setColor(r,g,b)
 	love.graphics.rectangle('fill', 0, 0, game.resolution.x, game.resolution.y)
 
@@ -86,4 +86,9 @@ function dirToDelta(dir, speed)
 	end
 
 	return deltaX, deltaY
+end
+
+function switchScreenAlign(align)
+	game.screen_align = align
+	love.resize(love.graphics.getWidth(), love.graphics.getHeight())
 end

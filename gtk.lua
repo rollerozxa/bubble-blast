@@ -9,13 +9,16 @@ local sparsifier = {}
 function gtk.update(gui)
 	for id, el in pairs(gui) do
 		if not el.is_visible or el.is_visible() then
-			if (mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and mouseClick())
-			 or (el.keybind and love.keyboard.isDown(el.keybind) and not sparsifier[id]) then
-				el.on_click()
-			end
+			if el.type == "button"
+			 or el.type == "tex_button" then
+				if (mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and mouseClick())
+				or (el.keybind and love.keyboard.isDown(el.keybind) and not sparsifier[id]) then
+					el.on_click()
+				end
 
-			if el.keybind then
-				sparsifier[id] = love.keyboard.isDown(el.keybind)
+				if el.keybind then
+					sparsifier[id] = love.keyboard.isDown(el.keybind)
+				end
 			end
 		end
 	end
@@ -43,6 +46,10 @@ function gtk.draw(gui)
 				end
 
 				love.graphics.draw(assets[el.texture], scaledX(el.x), scaledY(el.y), 0, scaledX(), scaledY())
+			elseif el.type == "label" then
+				love.graphics.setColor(1,1,1)
+
+				love.graphics.print(el.label, scaledX(el.x), scaledY(el.y), 0, scaledX(), scaledY())
 			end
 		end
 	end
