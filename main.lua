@@ -14,6 +14,8 @@ game = {
 	levelsUnlocked = 1,
 	state = "mainmenu",
 	newlyState = true,
+	overlay = false,
+	newlyOverlay = false,
 	screen_align = "center"
 }
 
@@ -26,6 +28,7 @@ sparsifier = {}
 oldmousedown = false
 
 scenes = {}
+overlays = {}
 
 json = require("misc.json")
 
@@ -37,6 +40,8 @@ require("game")
 require("mainmenu")
 require("selectlevel")
 require("settings")
+
+require("success")
 
 require("savegame")
 require("fonts")
@@ -94,8 +99,24 @@ function love.update()
 		game.newlyState = false
 	end
 
+	if game.overlay then
+		if game.newlyOverlay then
+			if overlays[game.overlay].init ~= nil then
+				overlays[game.overlay].init()
+			end
+
+			game.newlyOverlay = false
+		end
+	end
+
 	if scenes[game.state].update ~= nil then
 		scenes[game.state].update()
+	end
+
+	if game.overlay then
+		if overlays[game.overlay].update ~= nil then
+			overlays[game.overlay].update()
+		end
 	end
 
 	oldmousedown = love.mouse.isDown(1)
@@ -119,6 +140,12 @@ function love.draw()
 
 	if scenes[game.state].draw ~= nil then
 		scenes[game.state].draw()
+	end
+
+	if game.overlay then
+		if overlays[game.overlay].draw ~= nil then
+			overlays[game.overlay].draw()
+		end
 	end
 
 	love.graphics.setFont(fonts.sans.medium)
