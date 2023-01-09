@@ -53,6 +53,7 @@ function scenes.selectlevel.update()
 		if mouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) and mouseClick() and levelnum <= game.levelsUnlocked then
 			game.level = levelnum
 			switchState("game")
+			sounds.click:clone():play()
 		end
 	end
 end

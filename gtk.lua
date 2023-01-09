@@ -14,6 +14,7 @@ function gtk.update(gui)
 				if (mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and mouseClick())
 				or (el.keybind and love.keyboard.isDown(el.keybind) and not sparsifier[id]) then
 					el.on_click()
+					sounds.click:clone():play()
 				end
 
 				if el.keybind then

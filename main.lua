@@ -80,6 +80,7 @@ function love.load()
 	fonts = initFonts()
 
 	sounds = {
+		click = newSound("click"),
 		pop = newSound("pop"),
 		success = newSound("success"),
 	}
