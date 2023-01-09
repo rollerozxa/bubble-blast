@@ -109,13 +109,13 @@ function love.update()
 		end
 	end
 
-	if scenes[game.state].update ~= nil then
-		scenes[game.state].update()
-	end
-
 	if game.overlay then
 		if overlays[game.overlay].update ~= nil then
 			overlays[game.overlay].update()
+		end
+	else
+		if scenes[game.state].update ~= nil then
+			scenes[game.state].update()
 		end
 	end
 

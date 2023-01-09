@@ -68,6 +68,13 @@ function switchState(state)
 	game.newlyState = true
 end
 
+function switchOverlay(state)
+	if game.overlay ~= state then
+		game.overlay = state
+		game.newlyOverlay = true
+	end
+end
+
 function dirToDelta(dir, speed)
 	local deltaX, deltaY
 

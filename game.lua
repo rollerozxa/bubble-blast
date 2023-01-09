@@ -135,13 +135,7 @@ function scenes.game.update()
 	end
 
 	if tableEmpty(bubbles) and tableEmpty(particles) then
-		sounds.success:clone():play()
-
-		if game.level == game.levelsUnlocked then
-			game.levelsUnlocked = game.levelsUnlocked + 1
-			savegame.set('levelsUnlocked', game.levelsUnlocked)
-		end
-		switchState("selectlevel")
+		switchOverlay('success')
 	end
 end
 
