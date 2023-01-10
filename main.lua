@@ -12,6 +12,8 @@ game = {
 	},
 	level = 1,
 	levelsUnlocked = 1,
+	presses = 0,
+	presses_max = 0,
 	state = "mainmenu",
 	newlyState = true,
 	overlay = false,
@@ -139,8 +141,10 @@ end
 function love.draw()
 	love.graphics.translate(offset.x, offset.y)
 
-	if scenes[game.state].draw ~= nil then
-		scenes[game.state].draw()
+	if not newlyState then
+		if scenes[game.state].draw ~= nil then
+			scenes[game.state].draw()
+		end
 	end
 
 	if game.overlay then

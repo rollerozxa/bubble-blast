@@ -5,7 +5,6 @@ scenes.game = {}
 
 local bubbles = {}
 local particles = {}
-local presses = 0
 
 local gui = {
 	reload = {
@@ -41,7 +40,8 @@ local function initializeLevel()
 	local leveljson = love.filesystem.read("levelpacks/1/"..game.level..".json")
 	local leveldata = json.decode(leveljson)
 
-	presses = leveldata.presses
+	game.presses = leveldata.presses
+	game.max_presses = leveldata.presses
 	bubbles = {}
 	for _,bubble in pairs(leveldata.bubbles) do
 		table.insert(bubbles, {
@@ -89,14 +89,14 @@ function scenes.game.update()
 
 	for key,bubble in pairs(bubbles) do
 		if mouseCollisionScaled(bubble.x, bubble.y, 32, 32) then
-			if presses == 0 then
+			if game.presses == 0 then
 				break
 			end
 
 			bubbles[key].hovered = true
 
 			if mouseClick() then
-				presses = presses - 1
+				game.presses = game.presses - 1
 
 				breakBubble(key)
 
@@ -173,12 +173,12 @@ function scenes.game.draw()
 	love.graphics.rectangle('fill', 0, game.resolution.y - scaledY(32), game.resolution.x, scaledY(32))
 	love.graphics.setColor(1,1,1)
 
-	if presses == 0 then
+	if game.presses == 0 then
 		love.graphics.setColor(1,0.2,0.2)
 	end
 
 	love.graphics.setFont(fonts.sans.medium)
-	love.graphics.print(presses.." presses left", scaledX(15), scaledY(3), 0, scaledX(), scaledY())
+	love.graphics.print(game.presses.." presses left", scaledX(15), scaledY(3), 0, scaledX(), scaledY())
 
 	gtk.draw(gui)
 end

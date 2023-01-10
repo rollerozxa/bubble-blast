@@ -53,7 +53,7 @@ function overlays.success.draw()
 	local texts = {
 		"Level: "..game.level,
 		"Score: N/A",
-		"Touches: N/A"
+		"Touches: "..(game.max_presses - game.presses).." / "..game.max_presses
 	}
 
 	love.graphics.setFont(fonts.sans.medium)
