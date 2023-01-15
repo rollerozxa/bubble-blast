@@ -42,6 +42,7 @@ require("game")
 require("mainmenu")
 require("selectlevel")
 require("settings")
+require("help")
 
 require("success")
 require("pause")
