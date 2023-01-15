@@ -13,7 +13,8 @@ local gui = {
 		texture = "back_btn",
 		on_click = function()
 			switchState("mainmenu")
-		end
+		end,
+		keybind = "escape"
 	},
 
 	prev_button = {

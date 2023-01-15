@@ -44,6 +44,7 @@ require("selectlevel")
 require("settings")
 
 require("success")
+require("pause")
 
 require("savegame")
 require("fonts")
@@ -76,7 +77,8 @@ function love.load()
 		lock		= newImage("lock"),
 		back_btn	= newImage("back_btn"),
 		arrow_left	= newImage("arrow_left"),
-		arrow_right	= newImage("arrow_right")
+		arrow_right	= newImage("arrow_right"),
+		menu		= newImage("menu"),
 	}
 
 	fonts = initFonts()

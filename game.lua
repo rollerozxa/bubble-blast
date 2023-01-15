@@ -9,13 +9,23 @@ local particles = {}
 local gui = {
 	reload = {
 		type = "tex_button",
-		x = 320, y = 0,
+		x = 32*9, y = 0,
 		size = { x = 32, y = 32 },
 		texture = "refresh",
 		on_click = function()
 			scenes.game.init()
 		end,
 		keybind = 'n'
+	},
+	menu = {
+		type = "tex_button",
+		x = 32*10, y = 0,
+		size = { x = 32, y = 32 },
+		texture = "menu",
+		on_click = function()
+			switchOverlay('pause')
+		end,
+		keybind = 'escape'
 	},
 }
 
@@ -43,6 +53,7 @@ local function initializeLevel()
 	game.presses = leveldata.presses
 	game.max_presses = leveldata.presses
 	bubbles = {}
+	particles = {}
 	for _,bubble in pairs(leveldata.bubbles) do
 		table.insert(bubbles, {
 			x = 32 + 64 * (bubble.x - 1),
@@ -134,7 +145,7 @@ function scenes.game.update()
 		end
 	end
 
-	if tableEmpty(bubbles) and tableEmpty(particles) then
+	if tableEmpty(bubbles) then
 		switchOverlay('success')
 	end
 end
