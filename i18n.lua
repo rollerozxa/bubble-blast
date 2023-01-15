@@ -13,8 +13,8 @@ local function init_i18n(lang)
 	strings = json.decode(langdata)
 end
 
-function S(text)
-	return strings[text] or text
+function S(text, ...)
+	return string.format(strings[text] or text, ...)
 end
 
 init_i18n('en')

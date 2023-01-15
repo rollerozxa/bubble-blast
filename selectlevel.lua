@@ -62,7 +62,7 @@ function scenes.selectlevel.draw()
 	drawBG(64/255, 120/255, 161/255)
 
 	love.graphics.setFont(fonts.sans.medium)
-	love.graphics.print("Page: "..scenes.selectlevel.page, scaledX(136), scaledY(69), 0, scaledX(), scaledY())
+	love.graphics.print(S("Page: %s", scenes.selectlevel.page), scaledX(136), scaledY(69), 0, scaledX(), scaledY())
 	love.graphics.setFont(fonts.sans.small)
 
 	gtk.draw(gui)

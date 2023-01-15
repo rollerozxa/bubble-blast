@@ -6,7 +6,7 @@ local gui = {
 		type = "button",
 		x = 0, y = 0,
 		size = { x = 82, y = 32 },
-		label = "Back",
+		label = S("Back"),
 		on_click = function()
 			switchState("mainmenu")
 		end
@@ -16,14 +16,14 @@ local gui = {
 		type = "label",
 		x = 32, y = 64,
 		size = { x = 82, y = 32 },
-		label = "Game screen align:"
+		label = S("Game screen align:")
 	},
 
 	screen_align_top = {
 		type = "button",
 		x = 32*1, y = 32*3,
 		size = { x = 32*2.5, y = 32 },
-		label = "Top",
+		label = S("Top"),
 		on_click = function()
 			switchScreenAlign("top")
 		end
@@ -32,7 +32,7 @@ local gui = {
 		type = "button",
 		x = 32*4, y = 32*3,
 		size = { x = 32*2.5, y = 32 },
-		label = "Center",
+		label = S("Center"),
 		on_click = function()
 			switchScreenAlign("center")
 		end
@@ -41,7 +41,7 @@ local gui = {
 		type = "button",
 		x = 32*7, y = 32*3,
 		size = { x = 32*2.5, y = 32 },
-		label = "Bottom",
+		label = S("Bottom"),
 		on_click = function()
 			switchScreenAlign("bottom")
 		end

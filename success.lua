@@ -6,7 +6,7 @@ local gui = {
 		type = "button",
 		x = 1.5*32, y = 12*32,
 		size = { x = 2.5*32, y = 32 },
-		label = "Back",
+		label = S("Back"),
 		on_click = function()
 			switchOverlay(false)
 			switchState("selectlevel")
@@ -17,7 +17,7 @@ local gui = {
 		type = "button",
 		x = 5*32, y = 12*32,
 		size = { x = 4.5*32, y = 32 },
-		label = "Next level",
+		label = S("Next level"),
 		on_click = function()
 			game.level = game.level + 1
 			switchOverlay(false)
@@ -48,12 +48,12 @@ function overlays.success.draw()
 
 	love.graphics.setColor(1,1,1,1)
 	love.graphics.setFont(fonts.sans.mediumbig)
-	drawCenteredText(scaledX(4), scaledY(48), game.resolution.x, scaledY(64), "Level Complete!")
+	drawCenteredText(scaledX(4), scaledY(48), game.resolution.x, scaledY(64), S("Level Complete!"))
 
 	local texts = {
-		"Level: "..game.level,
-		"Score: N/A",
-		"Touches: "..(game.max_presses - game.presses).." / "..game.max_presses
+		S("Level: %s", game.level),
+		S("Score: %s", 'N/A'),
+		S("Touches: %s / %s", (game.max_presses - game.presses), game.max_presses)
 	}
 
 	love.graphics.setFont(fonts.sans.medium)

@@ -178,7 +178,10 @@ function scenes.game.draw()
 	end
 
 	love.graphics.setFont(fonts.sans.medium)
-	love.graphics.print(game.presses.." presses left", scaledX(15), scaledY(3), 0, scaledX(), scaledY())
+	love.graphics.print(S("%s touches left", game.presses), scaledX(15), scaledY(8), 0, scaledX(), scaledY())
+
+	love.graphics.setColor(1,1,1)
+	love.graphics.print(S("Level: %s", game.level), scaledX(15), scaledY(14*32+8), 0, scaledX(), scaledY())
 
 	gtk.draw(gui)
 end
