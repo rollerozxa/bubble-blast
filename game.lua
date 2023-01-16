@@ -7,16 +7,6 @@ local bubbles = {}
 local particles = {}
 
 local gui = {
-	reload = {
-		type = "tex_button",
-		x = 32*9, y = 0,
-		size = { x = 32, y = 32 },
-		texture = "refresh",
-		on_click = function()
-			scenes.game.init()
-		end,
-		keybind = 'n'
-	},
 	menu = {
 		type = "tex_button",
 		x = 32*10, y = 0,

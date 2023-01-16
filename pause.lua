@@ -12,9 +12,21 @@ local gui = {
 		end,
 		keybind = 'escape'
 	},
-	exitbtn = {
+
+	restartbtn = {
 		type = "button",
 		x = 96, y = 8*32,
+		size = { x = 160, y = 32 },
+		label = S("Restart"),
+		on_click = function()
+			switchOverlay(false)
+			scenes.game.init()
+		end
+	},
+
+	exitbtn = {
+		type = "button",
+		x = 96, y = 10*32,
 		size = { x = 160, y = 32 },
 		label = S("Exit"),
 		on_click = function()
