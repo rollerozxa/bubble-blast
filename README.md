@@ -5,4 +5,6 @@ A Bubble Blast clone written in LÖVE. Blast bubbles and watch them cause chain 
 ## Credits/Attribution
 This game makes use of the [*undefined medium*](https://undefined-medium.com/) font by Andi Rueckel, licensed under the SIL Open Font License v1.1.
 
-Credits to Magma Mobile for the original Bubble Blast... By the way why did you guys remove Bubble Blast Legacy? :'(
+Thanks to a certain Polish friend for the idea of higher resolution vectorised bubble graphics. <3
+
+Also credits to Magma Mobile for (what I assume to be) the original Bubble Blast... By the way why did you guys remove Bubble Blast Legacy? :'(

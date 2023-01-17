@@ -19,6 +19,18 @@ return {
 			love.graphics.print("Debug Grid On", 5, 460)
 		end
 	},
+
+	mouse = {
+		enabled = false,
+		keybind = 'm',
+		draw = function()
+			love.graphics.print("Debug Mouse Coll.", 5, 460)
+
+			love.graphics.setColor(0.3, 0.3, 0.9)
+			love.graphics.rectangle('fill', love.mouse.getX()-16, love.mouse.getY()-16, 32, 32)
+		end
+	},
+
 	info = {
 		enabled = false,
 		keybind = 'f',

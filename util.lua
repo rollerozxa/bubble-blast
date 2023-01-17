@@ -9,7 +9,11 @@ function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2)
 end
 
 function mouseCollision(x,y,w,h)
-	return checkCollision(x+offset.x, y+offset.y, w, h, love.mouse.getX(), love.mouse.getY(), 4, 4)
+	-- Safe area around the cursor that still treats it as a press, for fat fingered fucks
+	local safearea = 16
+	return checkCollision(
+		x+offset.x, y+offset.y, w, h,
+		love.mouse.getX()-safearea, love.mouse.getY()-safearea, safearea*2, safearea*2)
 end
 
 function mouseCollisionScaled(x,y,w,h)

@@ -9,7 +9,8 @@ local gui = {
 		label = S("Back"),
 		on_click = function()
 			switchState("mainmenu")
-		end
+		end,
+		keybind = "escape"
 	},
 
 	screen_align_lbl = {
