@@ -50,7 +50,7 @@ function overlays.pause.draw()
 
 	love.graphics.setColor(1,1,1,1)
 	love.graphics.setFont(fonts.sans.mediumbig)
-	drawCenteredText(scaledX(4), scaledY(48), game.resolution.x, scaledY(64), S("Game paused"))
+	drawCenteredText(scaledX(4), scaledY(64), game.resolution.x, scaledY(64), S("Game paused"))
 
 	gtk.draw(gui)
 end

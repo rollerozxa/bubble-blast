@@ -148,12 +148,7 @@ function scenes.game.draw()
 		local eyes
 
 		if bubble.blinktimer == 0 then
-			if bubble.hovered then
-				eyes = assets.eyes_squint
-			else
-				eyes = assets.bubble_eyes
-			end
-
+			eyes = bubble.hovered and assets.eyes_squint or assets.bubble_eyes
 
 			if math.random() > 0.995 then
 				bubble.blinktimer = 20

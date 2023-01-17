@@ -3,8 +3,8 @@
 
 game = {
 	resolution = {
-		x = 352,
-		y = 480
+		x = 352*1.5,
+		y = 480*1.5
 	},
 	base_resolution = {
 		x = 352,
@@ -72,7 +72,6 @@ function love.load()
 		eyes_squint = newImage("eyes_squint"),
 		eyes_closed = newImage("eyes_closed"),
 		particle	= newImage("particle"),
-		debug_grid	= newImage("_debug_grid"),
 		lvlok		= newImage("lvlok"),
 		lock		= newImage("lock"),
 		back_btn	= newImage("back_btn"),

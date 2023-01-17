@@ -6,11 +6,16 @@ return {
 		enabled = false,
 		keybind = 'g',
 		draw = function()
-			for x = 0,40 do
-				for y = 0,40 do
-					love.graphics.draw(assets.debug_grid, scaledX(x*32), scaledY(y*32), 0, scaledX(), scaledY())
-				end
+			local cellSize = scaledY(32)
+
+			for x = cellSize, game.resolution.x, cellSize do
+				love.graphics.line(x, 0, x, game.resolution.y)
 			end
+
+			for y = cellSize, game.resolution.y, cellSize do
+				love.graphics.line(0, y, game.resolution.x, y)
+			end
+
 			love.graphics.print("Debug Grid On", 5, 460)
 		end
 	},

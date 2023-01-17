@@ -48,7 +48,7 @@ function overlays.success.draw()
 
 	love.graphics.setColor(1,1,1,1)
 	love.graphics.setFont(fonts.sans.mediumbig)
-	drawCenteredText(scaledX(4), scaledY(48), game.resolution.x, scaledY(64), S("Level Complete!"))
+	drawCenteredText(scaledX(4), scaledY(64), game.resolution.x, scaledY(64), S("Level Complete!"))
 
 	local texts = {
 		S("Level: %s", game.level),
@@ -58,7 +58,7 @@ function overlays.success.draw()
 
 	love.graphics.setFont(fonts.sans.medium)
 	for i = 1, 3, 1 do
-		love.graphics.print(texts[i], scaledX(64), scaledY(3*32+(i*48)), 0, scaledX(), scaledY())
+		love.graphics.print(texts[i], scaledX(64), scaledY(4*32+(i*48)), 0, scaledX(), scaledY())
 	end
 
 	gtk.draw(gui)
