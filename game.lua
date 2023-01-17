@@ -135,6 +135,10 @@ function scenes.game.update()
 		end
 	end
 
+	if game.presses == 0 and tableEmpty(particles) then
+		switchOverlay('lose')
+	end
+
 	if tableEmpty(bubbles) then
 		switchOverlay('success')
 	end

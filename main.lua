@@ -44,8 +44,9 @@ require("selectlevel")
 require("settings")
 require("help")
 
-require("success")
+require("lose")
 require("pause")
+require("success")
 
 require("savegame")
 require("fonts")
@@ -84,6 +85,7 @@ function love.load()
 
 	sounds = {
 		click = newSound("click"),
+		lose = newSound("lose"),
 		pop = newSound("pop"),
 		success = newSound("success"),
 	}
