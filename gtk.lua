@@ -46,7 +46,11 @@ function gtk.draw(gui)
 					love.graphics.setColor(1,1,1)
 				end
 
-				love.graphics.draw(assets[el.texture], scaledX(el.x), scaledY(el.y), 0, scaledX(), scaledY())
+				if not el.scale then
+					el.scale = 1
+				end
+
+				love.graphics.draw(assets[el.texture], scaledX(el.x), scaledY(el.y), 0, scaledX(el.scale), scaledY(el.scale))
 			elseif el.type == "label" then
 				love.graphics.setColor(1,1,1)
 

@@ -148,7 +148,7 @@ function scenes.game.draw()
 	drawBG(121/255, 64/255, 148/255)
 
 	for _,bubble in pairs(bubbles) do
-		love.graphics.draw(assets.bubble[bubble.state], scaledX(bubble.x), scaledY(bubble.y), 0, scaledX(), scaledY())
+		love.graphics.draw(assets.bubble[bubble.state], scaledX(bubble.x), scaledY(bubble.y), 0, scaledX(0.25), scaledY(0.25))
 		local eyes
 
 		if bubble.blinktimer == 0 then
@@ -161,11 +161,11 @@ function scenes.game.draw()
 			eyes = assets.eyes_closed
 			bubble.blinktimer = bubble.blinktimer - 1
 		end
-		love.graphics.draw(eyes, scaledX(bubble.x), scaledY(bubble.y), 0, scaledX(), scaledY())
+		love.graphics.draw(eyes, scaledX(bubble.x), scaledY(bubble.y), 0, scaledX(0.25), scaledY(0.25))
 	end
 
 	for _,particle in pairs(particles) do
-		love.graphics.draw(assets.particle, scaledX(particle.x), scaledY(particle.y), 0, scaledX(), scaledY())
+		love.graphics.draw(assets.particle, scaledX(particle.x), scaledY(particle.y), 0, scaledX(0.25), scaledY(0.25))
 	end
 
 	love.graphics.setColor(0,0,0, 64/255)

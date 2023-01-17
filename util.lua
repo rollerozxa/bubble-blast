@@ -20,8 +20,16 @@ function mouseClick()
 	return love.mouse.isDown(1) and not oldmousedown
 end
 
-function newImage(filename)
-	return love.graphics.newImage("assets/"..filename..".png")
+function newImage(filename, nearest)
+	local img = love.graphics.newImage("assets/"..filename..".png")
+
+	if nearest then
+		img:setFilter("linear", "linear", 16)
+	else
+		img:setFilter("nearest", "nearest", 16)
+	end
+
+	return img
 end
 
 function newSound(filename)
@@ -55,7 +63,7 @@ function drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)
 end
 
 function drawBG(r,g,b)
-	love.graphics.setColor(r/2,g/2,b/2)
+	love.graphics.setColor(r/1.25,g/1.25,b/1.25)
 	love.graphics.rectangle('fill', 0-offset.x, 0-offset.y, love.graphics.getWidth()+(offset.x*2), love.graphics.getHeight()+(offset.y*2))
 	love.graphics.setColor(r,g,b)
 	love.graphics.rectangle('fill', 0, 0, game.resolution.x, game.resolution.y)

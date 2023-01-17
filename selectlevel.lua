@@ -10,6 +10,7 @@ local gui = {
 		type = "tex_button",
 		x = 0, y = 0,
 		size = { x = 64, y = 32 },
+		scale = 0.25,
 		texture = "back_btn",
 		on_click = function()
 			switchState("mainmenu")
@@ -21,6 +22,7 @@ local gui = {
 		type = "tex_button",
 		x = 32, y = 64,
 		size = { x = 32, y = 32 },
+		scale = 0.25,
 		texture = "arrow_left",
 		on_click = function()
 			scenes.selectlevel.page = scenes.selectlevel.page - 1
@@ -33,6 +35,7 @@ local gui = {
 		type = "tex_button",
 		x = 288, y = 64,
 		size = { x = 32, y = 32 },
+		scale = 0.25,
 		texture = "arrow_right",
 		on_click = function()
 			scenes.selectlevel.page = scenes.selectlevel.page + 1
@@ -85,11 +88,11 @@ function scenes.selectlevel.draw()
 		if levelnum <= game.levelsUnlocked then
 			love.graphics.print(levelnum, scaledX(x * 64 - 30), scaledY(128 + y * 64 + 1), 0, scaledX(), scaledY())
 		else
-			love.graphics.draw(assets.lock, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(), scaledY())
+			love.graphics.draw(assets.lock, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(0.25), scaledY(0.25))
 		end
 
 		if levelnum < game.levelsUnlocked then
-			love.graphics.draw(assets.lvlok, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(), scaledY())
+			love.graphics.draw(assets.lvlok, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(0.25), scaledY(0.25))
 		end
 	end
 end
