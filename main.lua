@@ -18,7 +18,8 @@ game = {
 	newlyState = true,
 	overlay = false,
 	newlyOverlay = false,
-	screen_align = "center"
+	screen_align = "center",
+	fucking_android_back_button_hack = false
 }
 
 offset = {
@@ -127,6 +128,8 @@ function love.update()
 
 	oldmousedown = love.mouse.isDown(1)
 
+	game.fucking_android_back_button_hack = false
+
 	if love.keyboard.isDown('f3') then
 		for id, def in pairs(avlusn) do
 			if love.keyboard.isDown(def.keybind) and not sparsifier[def.keybind] then
@@ -189,4 +192,8 @@ function love.resize(w, h)
 		offset.x = (w - game.resolution.x)
 		offset.y = (h - game.resolution.y)
 	end
+end
+
+function love.keypressed(key)
+	game.fucking_android_back_button_hack = love.system.getOS("Android") and key == "escape"
 end

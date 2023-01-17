@@ -12,7 +12,8 @@ function gtk.update(gui)
 			if el.type == "button"
 			 or el.type == "tex_button" then
 				if (mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and mouseClick())
-				or (el.keybind and love.keyboard.isDown(el.keybind) and not sparsifier[id]) then
+				or (el.keybind and love.keyboard.isDown(el.keybind))
+				or (el.keybind == "escape" and game.fucking_android_back_button_hack) then
 					el.on_click()
 					sounds.click:clone():play()
 				end
