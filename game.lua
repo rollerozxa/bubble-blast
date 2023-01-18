@@ -37,8 +37,7 @@ local function initializeRandom()
 end
 
 local function initializeLevel()
-	local leveljson = love.filesystem.read("levelpacks/1/"..game.level..".json")
-	local leveldata = json.decode(leveljson)
+	local leveldata = levels[game.levelpack][game.level]
 
 	game.presses = leveldata.presses
 	game.max_presses = leveldata.presses
@@ -48,7 +47,7 @@ local function initializeLevel()
 		table.insert(bubbles, {
 			x = 32 + 64 * (bubble.x - 1),
 			y = 64 + 64 * (bubble.y - 1),
-			state = bubble.state,
+			state = bubble.st,
 			blinktimer = 0,
 			hovered = false
 		})

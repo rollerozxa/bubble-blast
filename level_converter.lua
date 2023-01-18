@@ -2,12 +2,14 @@
 -- Utility script to convert original Bubble Blast levels into the format used by LÖVE Blast.
 
 json = require("misc.json")
+love.filesystem.createDirectory("levelpacks/")
 
 for pack = 1,100 do
 	local packdata = json.decode(love.filesystem.read("kwav_cutter/levels/"..pack..".json"))
-	love.filesystem.createDirectory("levelpacks/"..pack)
 
 	local lvlnum = 1
+	local levels = {}
+
 	for _,leveldata in pairs(packdata.levels) do
 		local level = {}
 		level.presses = leveldata.touchmax
@@ -21,15 +23,19 @@ for pack = 1,100 do
 				table.insert(level.bubbles, {
 					x = x,
 					y = y,
-					state = bubble
+					st = bubble
 				})
 			end
 
 			item = item + 1
 		end
 
-		love.filesystem.write("levelpacks/"..pack.."/"..lvlnum..".json", json.encode(level))
+		table.insert(levels, level)
 
 		lvlnum = lvlnum + 1
 	end
+
+	love.filesystem.write("levelpacks/"..pack..".json", json.encode({ levels = levels }))
 end
+
+love.event.quit()

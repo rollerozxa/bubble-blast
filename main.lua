@@ -1,6 +1,8 @@
 
 -- main.lua: Main script, take care of scenes and initialisations.
 
+--require('level_converter')
+
 game = {
 	resolution = {
 		x = 352*1.5,
@@ -12,6 +14,7 @@ game = {
 	},
 	level = 1,
 	levelsUnlocked = 1,
+	levelpack = 1,
 	presses = 0,
 	presses_max = 0,
 	state = "mainmenu",
@@ -21,6 +24,8 @@ game = {
 	screen_align = "center",
 	fucking_android_back_button_hack = false
 }
+
+levels = {}
 
 offset = {
 	x = 0,
@@ -95,6 +100,11 @@ function love.load()
 	if savegame.get('levelsUnlocked') then
 		game.levelsUnlocked = savegame.get('levelsUnlocked')
 	end
+
+	-- Hardcoded to load levelpack 1
+	local leveljson = love.filesystem.read("levelpacks/1.json")
+	local leveldata = json.decode(leveljson)
+	levels[1] = leveldata.levels
 end
 
 function love.update()
