@@ -10,7 +10,7 @@ local gui = {
 		size = { x = 160, y = 32 },
 		label = S("Play"),
 		on_click = function()
-			switchState("selectlevel")
+			switchState("selectpack")
 		end
 	},
 

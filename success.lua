@@ -19,21 +19,36 @@ local gui = {
 		size = { x = 4.5*32, y = 32 },
 		label = S("Next level"),
 		on_click = function()
-			game.level = game.level + 1
+			if game.level == 100 then
+				game.level = 1
+				game.levelpack = game.levelpack + 1
+				scenes.selectlevel.page = 1
+			else
+				game.level = game.level + 1
+			end
+
 			switchOverlay(false)
 			switchState("game")
 		end,
-		is_visible = function()
-			return game.level ~= 100
-		end
-	},
+		--is_visible = function()
+		--	return game.level ~= 100 and game.levelpack ~= 5
+		--end
+	}
 }
 
 function overlays.success.init()
 	sounds.success:clone():play()
 
-	if game.level == game.levelsUnlocked then
-		game.levelsUnlocked = game.levelsUnlocked + 1
+	if game.level == game.levelsUnlocked or game.level == 100 then
+		if game.level == 100 then
+			game.levelsUnlocked = 1
+			game.levelpacksUnlocked = game.levelpacksUnlocked + 1
+
+			savegame.set('levelpacksUnlocked', game.levelpacksUnlocked)
+		else
+			game.levelsUnlocked = game.levelsUnlocked + 1
+		end
+
 		savegame.set('levelsUnlocked', game.levelsUnlocked)
 	end
 end

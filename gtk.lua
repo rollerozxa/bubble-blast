@@ -38,8 +38,11 @@ function gtk.draw(gui)
 
 				love.graphics.rectangle("fill", scaledX(el.x), scaledY(el.y), scaledX(el.size.x), scaledY(el.size.y))
 				love.graphics.setColor(1,1,1)
-				love.graphics.setFont(fonts.sans.medium)
-				drawCenteredText(scaledX(el.x), scaledY(el.y+2), scaledX(el.size.x), scaledY(el.size.y), el.label)
+				-- Allow for custom drawing on the button that can override the text
+				if not el.on_draw or not el.on_draw() then
+					love.graphics.setFont(fonts.sans.medium)
+					drawCenteredText(scaledX(el.x), scaledY(el.y+2), scaledX(el.size.x), scaledY(el.size.y), el.label)
+				end
 			elseif el.type == "tex_button" then
 				if mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) then
 					love.graphics.setColor(0.1,0.1,0.1)

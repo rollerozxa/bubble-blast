@@ -46,6 +46,13 @@ local gui = {
 	},
 }
 
+-- Checks if player can play level, depending on levels unlocked
+-- and levelpacks unlocked.
+function canPlay(levelnum)
+	return (levelnum <= game.levelsUnlocked)
+		or (game.levelpack < game.levelpacksUnlocked)
+end
+
 function scenes.selectlevel.update()
 	gtk.update(gui)
 
@@ -54,7 +61,7 @@ function scenes.selectlevel.update()
 		local y = math.floor(i / 5)
 		local levelnum = ((scenes.selectlevel.page - 1) * 25 ) + i + 1
 
-		if mouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) and mouseClick() and levelnum <= game.levelsUnlocked then
+		if mouseCollisionScaled(x * 64 - 32, 128 + y * 64, 32, 32) and mouseClick() and canPlay(levelnum) then
 			game.level = levelnum
 			switchState("game")
 			sounds.click:clone():play()
@@ -85,13 +92,13 @@ function scenes.selectlevel.draw()
 		love.graphics.rectangle('fill', scaledX(x * 64 - 32), scaledY(128 + y * 64), scaledX(32), scaledY(32))
 
 		love.graphics.setColor(1,1,1)
-		if levelnum <= game.levelsUnlocked then
+		if canPlay(levelnum) then
 			love.graphics.print(levelnum, scaledX(x * 64 - 30), scaledY(128 + y * 64 + 1), 0, scaledX(), scaledY())
 		else
 			love.graphics.draw(assets.lock, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(0.25), scaledY(0.25))
 		end
 
-		if levelnum < game.levelsUnlocked then
+		if canPlay(levelnum+1) then
 			love.graphics.draw(assets.lvlok, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(0.25), scaledY(0.25))
 		end
 	end

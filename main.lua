@@ -15,6 +15,7 @@ game = {
 	level = 1,
 	levelsUnlocked = 1,
 	levelpack = 1,
+	levelpacksUnlocked = 1,
 	presses = 0,
 	presses_max = 0,
 	state = "mainmenu",
@@ -47,6 +48,7 @@ require("util")
 require("game")
 require("mainmenu")
 require("selectlevel")
+require("selectpack")
 require("settings")
 require("help")
 
@@ -100,11 +102,17 @@ function love.load()
 	if savegame.get('levelsUnlocked') then
 		game.levelsUnlocked = savegame.get('levelsUnlocked')
 	end
+	if savegame.get('levelpacksUnlocked') then
+		game.levelpacksUnlocked = savegame.get('levelpacksUnlocked')
+	end
 
 	-- Hardcoded to load levelpack 1
-	local leveljson = love.filesystem.read("levelpacks/1.json")
-	local leveldata = json.decode(leveljson)
-	levels[1] = leveldata.levels
+	for i = 1, 5, 1 do
+		local leveljson = love.filesystem.read("levelpacks/"..i..".json")
+		local leveldata = json.decode(leveljson)
+		levels[i] = leveldata.levels
+	end
+
 end
 
 function love.update()
