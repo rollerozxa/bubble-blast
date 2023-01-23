@@ -45,5 +45,12 @@ function scenes.mainmenu.draw()
 	gtk.draw(gui)
 
 	love.graphics.setFont(fonts.sans.bigger)
+	love.graphics.setColor(0,0,0)
+	for x = -4, 4, 1 do
+		for y = -4, 4, 1 do
+			love.graphics.print("Bubble Blast", scaledX(35+x), scaledY(53+y), 0, scaledX(), scaledY())
+		end
+	end
+	love.graphics.setColor(1,1,1)
 	love.graphics.print("Bubble Blast", scaledX(35), scaledY(53), 0, scaledX(), scaledY())
 end
