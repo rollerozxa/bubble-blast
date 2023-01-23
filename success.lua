@@ -54,7 +54,7 @@ function overlays.success.init()
 end
 
 function overlays.success.update()
-	gtk.update(gui)
+	gtk.update(gui, true)
 end
 
 function overlays.success.draw()
@@ -67,14 +67,14 @@ function overlays.success.draw()
 
 	local texts = {
 		S("Level: %s", game.level),
-		S("Score: %s", 'N/A'),
+		--S("Score: %s", 'N/A'),
 		S("Touches: %s / %s", (game.max_presses - game.presses), game.max_presses)
 	}
 
 	love.graphics.setFont(fonts.sans.medium)
-	for i = 1, 3, 1 do
+	for i = 1, #texts, 1 do
 		love.graphics.print(texts[i], scaledX(64), scaledY(4*32+(i*48)), 0, scaledX(), scaledY())
 	end
 
-	gtk.draw(gui)
+	gtk.draw(gui, true)
 end

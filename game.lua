@@ -89,7 +89,7 @@ function scenes.game.update()
 	gtk.update(gui)
 
 	for key,bubble in pairs(bubbles) do
-		if mouseCollisionScaled(bubble.x, bubble.y, 32, 32) then
+		if mouseCollisionScaled(bubble.x, bubble.y, 32, 32) and not game.overlay then
 			if game.presses == 0 then
 				break
 			end
@@ -115,7 +115,7 @@ function scenes.game.update()
 		if tableEmpty(bubbles) then
 			speed = 8
 		else
-			speed = 3
+			speed = 4
 		end
 
 		local deltaX, deltaY = dirToDelta(particle.dir, speed)
@@ -137,7 +137,7 @@ function scenes.game.update()
 		end
 	end
 
-	if game.presses == 0 and tableEmpty(particles) then
+	if game.presses == 0 and tableEmpty(particles) and not tableEmpty(bubbles) then
 		switchOverlay('lose')
 	end
 

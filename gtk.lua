@@ -6,13 +6,13 @@ gtk = {}
 
 local sparsifier = {}
 
-function gtk.update(gui)
+function gtk.update(gui, is_overlay)
 	for id, el in pairs(gui) do
-		if not el.is_visible or el.is_visible() then
+		if not el.is_visible or el.is_visible() and (is_overlay or not game.overlay) then
 			if el.type == "button"
 			 or el.type == "tex_button" then
 				if (mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and mouseClick())
-				or (el.keybind and love.keyboard.isDown(el.keybind))
+				or (el.keybind and love.keyboard.isDown(el.keybind) and not sparsifier[id])
 				or (el.keybind == "escape" and game.fucking_android_back_button_hack) then
 					el.on_click()
 					sounds.click:clone():play()
@@ -26,11 +26,11 @@ function gtk.update(gui)
 	end
 end
 
-function gtk.draw(gui)
+function gtk.draw(gui, is_overlay)
 	for id, el in pairs(gui) do
 		if not el.is_visible or el.is_visible() then
 			if el.type == "button" then
-				if mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) then
+				if mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and (is_overlay or not game.overlay) then
 					love.graphics.setColor(0,0,0.1)
 				else
 					love.graphics.setColor(0.1,0.1,0.1)
@@ -44,7 +44,7 @@ function gtk.draw(gui)
 					drawCenteredText(scaledX(el.x), scaledY(el.y+2), scaledX(el.size.x), scaledY(el.size.y), el.label)
 				end
 			elseif el.type == "tex_button" then
-				if mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) then
+				if mouseCollisionScaled(el.x, el.y, el.size.x, el.size.y) and (is_overlay or not game.overlay) then
 					love.graphics.setColor(0.1,0.1,0.1)
 				else
 					love.graphics.setColor(1,1,1)

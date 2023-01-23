@@ -30,7 +30,7 @@ function overlays.lose.init()
 end
 
 function overlays.lose.update()
-	gtk.update(gui)
+	gtk.update(gui, true)
 end
 
 function overlays.lose.draw()
@@ -41,5 +41,5 @@ function overlays.lose.draw()
 	love.graphics.setFont(fonts.sans.mediumbig)
 	drawCenteredText(scaledX(4), scaledY(64), game.resolution.x, scaledY(64), S("Game over..."))
 
-	gtk.draw(gui)
+	gtk.draw(gui, true)
 end

@@ -36,12 +36,8 @@ local gui = {
 	}
 }
 
-function overlays.pause.init()
-
-end
-
 function overlays.pause.update()
-	gtk.update(gui)
+	gtk.update(gui, true)
 end
 
 function overlays.pause.draw()
@@ -52,5 +48,5 @@ function overlays.pause.draw()
 	love.graphics.setFont(fonts.sans.mediumbig)
 	drawCenteredText(scaledX(4), scaledY(64), game.resolution.x, scaledY(64), S("Game paused"))
 
-	gtk.draw(gui)
+	gtk.draw(gui, true)
 end
