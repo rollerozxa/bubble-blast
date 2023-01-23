@@ -44,5 +44,13 @@ return {
 		draw = function()
 			love.graphics.print("blarg: "..tostring(oldmousedown))
 		end
-	}
+	},
+
+	presses = {
+		enabled = false,
+		keybind = 'p',
+		draw = function()
+			love.graphics.print(table.concat(presses, ", "))
+		end
+	},
 }

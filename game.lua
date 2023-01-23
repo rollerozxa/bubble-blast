@@ -43,6 +43,7 @@ local function initializeLevel()
 	game.max_presses = leveldata.presses
 	bubbles = {}
 	particles = {}
+	presses = {}
 	for _,bubble in pairs(leveldata.bubbles) do
 		table.insert(bubbles, {
 			x = 32 + 64 * (bubble.x - 1),
@@ -99,6 +100,8 @@ function scenes.game.update()
 				game.presses = game.presses - 1
 
 				breakBubble(key)
+
+				table.insert(presses, ((bubble.x - 32)/64 +1).."-"..((bubble.y - 64)/64 +1))
 
 				break
 			end

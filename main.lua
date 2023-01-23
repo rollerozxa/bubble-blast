@@ -26,6 +26,8 @@ game = {
 	fucking_android_back_button_hack = false
 }
 
+presses = {}
+
 levels = {}
 
 offset = {
