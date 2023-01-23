@@ -108,6 +108,8 @@ function dirToDelta(dir, speed)
 end
 
 function switchScreenAlign(align)
-	game.screen_align = align
+	game.screenAlign = align
 	love.resize(love.graphics.getWidth(), love.graphics.getHeight())
+
+	savegame.set('screenAlign', align)
 end

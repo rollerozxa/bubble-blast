@@ -22,7 +22,7 @@ game = {
 	newlyState = true,
 	overlay = false,
 	newlyOverlay = false,
-	screen_align = "center",
+	screenAlign = "center",
 	fucking_android_back_button_hack = false
 }
 
@@ -101,12 +101,9 @@ function love.load()
 	}
 
 	savegame.load()
-	if savegame.get('levelsUnlocked') then
-		game.levelsUnlocked = savegame.get('levelsUnlocked')
-	end
-	if savegame.get('levelpacksUnlocked') then
-		game.levelpacksUnlocked = savegame.get('levelpacksUnlocked')
-	end
+	game.levelsUnlocked = savegame.get('levelsUnlocked') or 1
+	game.screenAlign = savegame.get('screenAlign') or 'center'
+	game.levelpacksUnlocked = savegame.get('levelpacksUnlocked') or 1
 
 	-- Hardcoded to load levelpack 1
 	for i = 1, 5, 1 do
@@ -201,14 +198,14 @@ function love.resize(w, h)
 		game.resolution.x = math.ceil(game.resolution.y * 0.733)
 	end
 
-	if game.screen_align == "top" then
+	if game.screenAlign == "top" then
 		local _, y, _, _ = love.window.getSafeArea()
 		offset.x = 0
 		offset.y = y
-	elseif game.screen_align == "center" then
+	elseif game.screenAlign == "center" then
 		offset.x = (w - game.resolution.x) / 2
 		offset.y = (h - game.resolution.y) / 2
-	elseif game.screen_align == "bottom" then
+	elseif game.screenAlign == "bottom" then
 		offset.x = (w - game.resolution.x)
 		offset.y = (h - game.resolution.y)
 	end
