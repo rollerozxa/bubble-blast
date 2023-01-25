@@ -45,6 +45,12 @@ local function initializeLevel()
 	particles = {}
 	presses = {}
 	for _,bubble in pairs(leveldata.bubbles) do
+
+		-- level 1-32 hack to fix
+		if game.level == 32 and game.levelpack == 1 and bubble.x == 5 and bubble.y == 2 then
+			bubble.st = 4
+		end
+
 		table.insert(bubbles, {
 			x = 32 + 64 * (bubble.x - 1),
 			y = 64 + 64 * (bubble.y - 1),
