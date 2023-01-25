@@ -66,6 +66,17 @@ function drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)
 	love.graphics.print(text, rectX+rectWidth/2, rectY+rectHeight/2, 0, scaledX(), scaledY(), textWidth/2, textHeight/2)
 end
 
+function printOutlined(text, x, y, rds)
+	love.graphics.setColor(0,0,0)
+	for oux = -rds, rds, 1 do
+		for ouy = -rds, rds, 1 do
+			love.graphics.print(text, scaledX(x+oux), scaledY(y+ouy), 0, scaledX(), scaledY())
+		end
+	end
+	love.graphics.setColor(1,1,1)
+	love.graphics.print(text, scaledX(x), scaledY(y), 0, scaledX(), scaledY())
+end
+
 function drawBG(r,g,b)
 	love.graphics.setColor(r/1.25,g/1.25,b/1.25)
 	love.graphics.rectangle('fill', 0-offset.x, 0-offset.y, love.graphics.getWidth()+(offset.x*2), love.graphics.getHeight()+(offset.y*2))
