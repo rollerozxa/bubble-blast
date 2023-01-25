@@ -1,7 +1,19 @@
 
 scenes.selectpack = {}
 
-local gui = {}
+local gui = {
+	back_button = {
+		type = "tex_button",
+		x = 0, y = 0,
+		size = { x = 64, y = 32 },
+		scale = 0.25,
+		texture = "back_btn",
+		on_click = function()
+			switchState("mainmenu")
+		end,
+		keybind = "escape"
+	},
+}
 
 for i = 1, 5, 1 do
 	gui["levelpack"..i] = {

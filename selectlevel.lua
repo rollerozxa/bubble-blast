@@ -13,7 +13,7 @@ local gui = {
 		scale = 0.25,
 		texture = "back_btn",
 		on_click = function()
-			switchState("mainmenu")
+			switchState("selectpack")
 		end,
 		keybind = "escape"
 	},
