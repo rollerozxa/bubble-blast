@@ -77,13 +77,19 @@ end
 
 function switchState(state)
 	game.state = state
-	game.newlyState = true
+
+	if scenes[game.state].init ~= nil then
+		scenes[game.state].init()
+	end
 end
 
 function switchOverlay(state)
 	if game.overlay ~= state then
 		game.overlay = state
-		game.newlyOverlay = true
+
+		if game.overlay and overlays[game.overlay].init ~= nil then
+			overlays[game.overlay].init()
+		end
 	end
 end
 

@@ -112,27 +112,11 @@ function love.load()
 		levels[i] = leveldata.levels
 	end
 
+	-- Hardcode main menu scene init
+	scenes.mainmenu.init()
 end
 
 function love.update()
-	if game.newlyState then
-		if scenes[game.state].init ~= nil then
-			scenes[game.state].init()
-		end
-
-		game.newlyState = false
-	end
-
-	if game.overlay then
-		if game.newlyOverlay then
-			if overlays[game.overlay].init ~= nil then
-				overlays[game.overlay].init()
-			end
-
-			game.newlyOverlay = false
-		end
-	end
-
 	if scenes[game.state].update ~= nil then
 		scenes[game.state].update()
 	end
