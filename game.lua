@@ -22,13 +22,17 @@ local gui = {
 -- Helper functions
 
 local function initializeRandom()
+	game.presses = 10
+	game.max_presses = 10
 	bubbles = {}
+	particles = {}
+	presses = {}
 	for x = 0,4 do
 		for y = 0,5 do
 			table.insert(bubbles, {
 				x = 32 + 64 * x,
 				y = 64 + 64 * y,
-				state = love.math.random(1,4),
+				state = love.math.random(2,4),
 				blinktimer = 0,
 				hovered = false
 			})
@@ -136,7 +140,7 @@ function scenes.game.update()
 
 	for particleKey,particle in pairs(particles) do
 		for bubbleKey,bubble in pairs(bubbles) do
-			if checkCollision(particle.x +7, particle.y +7, 18, 18, bubble.x, bubble.y, 32, 32) then
+			if checkCollision(particle.x, particle.y, 32, 32, bubble.x, bubble.y, 32, 32) then
 				breakBubble(bubbleKey)
 				particles[particleKey] = nil
 			end
