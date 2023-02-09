@@ -58,6 +58,7 @@ require("lose")
 require("pause")
 require("success")
 require("skip")
+require("final")
 
 require("savegame")
 require("fonts")

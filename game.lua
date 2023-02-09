@@ -156,7 +156,12 @@ function scenes.game.update()
 	end
 
 	if tableEmpty(bubbles) then
-		switchOverlay('success')
+		-- LAST LEVEL!!!
+		if game.level == 100 and game.levelpack == 5 then
+			switchOverlay('final')
+		else
+			switchOverlay('success')
+		end
 	end
 end
 
@@ -197,7 +202,7 @@ function scenes.game.draw()
 	love.graphics.print(S("%s touches left", game.presses), scaledX(15), scaledY(8), 0, scaledX(), scaledY())
 
 	love.graphics.setColor(1,1,1)
-	love.graphics.print(S("Level: %s", game.level), scaledX(15), scaledY(14*32+8), 0, scaledX(), scaledY())
+	love.graphics.print(S("Level: %s-%s", game.levelpack, game.level), scaledX(15), scaledY(14*32+8), 0, scaledX(), scaledY())
 
 	gtk.draw(gui)
 end
