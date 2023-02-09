@@ -148,7 +148,11 @@ function scenes.game.update()
 	end
 
 	if game.presses == 0 and tableEmpty(particles) and not tableEmpty(bubbles) then
-		switchOverlay('lose')
+		if savegame.get('timesLost') >= 15 and game.level == game.levelsUnlocked then
+			switchOverlay('skip')
+		else
+			switchOverlay('lose')
+		end
 	end
 
 	if tableEmpty(bubbles) then

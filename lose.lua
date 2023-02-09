@@ -27,6 +27,8 @@ local gui = {
 
 function overlays.lose.init()
 	sounds.lose:clone():play()
+
+	savegame.change('timesLost', 1)
 end
 
 function overlays.lose.update()

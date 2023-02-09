@@ -57,6 +57,7 @@ require("help")
 require("lose")
 require("pause")
 require("success")
+require("skip")
 
 require("savegame")
 require("fonts")
@@ -84,6 +85,7 @@ function love.load()
 		eyes_closed = newImage("eyes_closed"),
 		particle	= newImage("particle"),
 		lvlok		= newImage("lvlok"),
+		lvlskip		= newImage("lvlskip"),
 		lock		= newImage("lock"),
 		back_btn	= newImage("back_btn"),
 		arrow_left	= newImage("arrow_left"),
@@ -104,6 +106,9 @@ function love.load()
 	game.levelsUnlocked = savegame.get('levelsUnlocked') or 1
 	game.screenAlign = savegame.get('screenAlign') or 'center'
 	game.levelpacksUnlocked = savegame.get('levelpacksUnlocked') or 1
+	if not savegame.get('timesLost') then
+		savegame.set('timesLost', 0)
+	end
 
 	-- Hardcoded to load levelpack 1
 	for i = 1, 5, 1 do

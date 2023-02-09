@@ -24,3 +24,8 @@ function savegame.set(key, value)
 	savegame.data[key] = value
 	savegame.save()
 end
+
+-- Changes the value of the savegame key (if does not exist, it will set key to value).
+function savegame.change(key, value)
+	savegame.set(key, (savegame.get(key) or 0) + value)
+end

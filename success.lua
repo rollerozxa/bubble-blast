@@ -39,6 +39,8 @@ local gui = {
 function overlays.success.init()
 	sounds.success:clone():play()
 
+	savegame.set('skip'..game.levelpack..'-'..game.level, nil)
+
 	if game.level == game.levelsUnlocked or game.level == 100 then
 		if game.level == 100 then
 			game.levelsUnlocked = 1
@@ -51,6 +53,8 @@ function overlays.success.init()
 
 		savegame.set('levelsUnlocked', game.levelsUnlocked)
 	end
+
+	savegame.set('timesLost', 0)
 end
 
 function overlays.success.update()

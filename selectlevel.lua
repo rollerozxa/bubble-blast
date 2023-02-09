@@ -99,7 +99,9 @@ function scenes.selectlevel.draw()
 		end
 
 		if canPlay(levelnum+1) then
-			love.graphics.draw(assets.lvlok, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(0.25), scaledY(0.25))
+			local status = savegame.get('skip'..game.levelpack..'-'..levelnum) and assets.lvlskip or assets.lvlok
+
+			love.graphics.draw(status, scaledX(x * 64 - 32), scaledY(128 + y * 64), 0, scaledX(0.25), scaledY(0.25))
 		end
 	end
 end
